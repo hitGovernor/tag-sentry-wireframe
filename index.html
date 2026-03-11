@@ -3,33 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TagSentry — Product Wireframes v1.0</title>
-<link rel="stylesheet" href="styles/main.css">
+<title>TagSentry — Product Wireframes v1.3</title>
+<link rel="stylesheet" href="wireframe.css">
 </head>
 <body>
 
 <!-- ══════════════════════════════════
+     STICKY NAV
+══════════════════════════════════════ -->
+<header class="top-bar">
+  <a class="bar-brand" href="#cover">
+    <div class="bar-logo">TS</div>
+    <span class="bar-name">Tag<span>Sentry</span></span>
+  </a>
+  <span class="bar-version js-version">v1.3.0</span>
+  <nav class="bar-spacer bar-nav" style="display:flex">
+    <a href="#arch">Architecture</a>
+    <a href="#live">Live</a>
+    <a href="#detail">Detail</a>
+    <a href="#sessions">Sessions</a>
+    <a href="#diff">Diff</a>
+    <a href="#pii">PII</a>
+    <a href="#allowlist">Allow List</a>
+    <a href="#export">Export</a>
+    <a href="#settings">Settings</a>
+  </nav>
+  <button class="bar-dl js-download">⬇ Download Extension</button>
+</header>
+
+
+<!-- ══════════════════════════════════
      COVER
 ══════════════════════════════════════ -->
-<div class="cover" id="cover">
+<section class="cover" id="cover">
   <div class="cover-grid"></div>
   <div class="cover-glow"></div>
-
   <div class="cover-inner">
-    <div class="cover-eyebrow">Product Wireframes · v1.0</div>
-    <h1 class="cover-title">
-      Tag<br>
-      <em>Sentry</em>
-    </h1>
-    <p class="cover-desc">A Chrome extension for martech & adtech professionals to intercept, identify, audit, and baseline-compare tracking implementations in real time.</p>
+    <div class="cover-eyebrow">Product Wireframes · <span class="js-version">v1.3.0</span></div>
+    <h1 class="cover-title">Tag<br><em>Sentry</em></h1>
+    <p class="cover-desc">A Chrome extension for martech &amp; adtech professionals to intercept, identify, audit, and baseline-compare tracking implementations in real time.</p>
     <div class="cover-meta">
       <div class="cover-meta-item">Chrome Extension · MV3</div>
-      <div class="cover-meta-item">8 Core Screens</div>
+      <div class="cover-meta-item">9 Core Screens</div>
       <div class="cover-meta-item">80+ Vendor Patterns</div>
       <div class="cover-meta-item">PII Detection Engine</div>
     </div>
   </div>
-
   <nav class="cover-index">
     <a class="index-item" href="#arch"><span class="index-num">00</span><span class="index-dot"></span>Architecture</a>
     <a class="index-item" href="#live"><span class="index-num">01</span><span class="index-dot"></span>Live Feed</a>
@@ -37,11 +56,31 @@
     <a class="index-item" href="#sessions"><span class="index-num">03</span><span class="index-dot"></span>Sessions</a>
     <a class="index-item" href="#diff"><span class="index-num">04</span><span class="index-dot"></span>Diff View</a>
     <a class="index-item" href="#pii"><span class="index-num">05</span><span class="index-dot"></span>PII Audit</a>
-    <a class="index-item" href="#whitelist"><span class="index-num">06</span><span class="index-dot"></span>Whitelist</a>
+    <a class="index-item" href="#allowlist"><span class="index-num">06</span><span class="index-dot"></span>Allow List</a>
     <a class="index-item" href="#export"><span class="index-num">07</span><span class="index-dot"></span>Export</a>
     <a class="index-item" href="#settings"><span class="index-num">08</span><span class="index-dot"></span>Settings</a>
   </nav>
-</div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     CHANGELOG STRIP
+══════════════════════════════════════ -->
+<section class="changelog">
+  <div class="changelog-title">▸ What's New — Release History</div>
+  <div class="changelog-grid">
+    <div class="cl-item new"><div class="cl-ver">v1.3.0 — Current</div><div class="cl-text"><strong>Default Light/Large</strong> — New installs open with Light theme and Large (14px) text. Version badge reads live from the installed manifest, never stale.</div></div>
+    <div class="cl-item fix"><div class="cl-ver">v1.3.0</div><div class="cl-text"><strong>Per-Tab Request Cache</strong> — Switching browser tabs no longer overwrites the request list. Each tab's session is cached separately and restored instantly on return.</div></div>
+    <div class="cl-item new"><div class="cl-ver">v1.3.0</div><div class="cl-text"><strong>Allow List Enable/Disable All</strong> — One-click toggle to enable or disable all vendors at once. Button label and color update dynamically based on current state.</div></div>
+    <div class="cl-item fix"><div class="cl-ver">v1.3.0</div><div class="cl-text"><strong>PII Respects Disabled Patterns</strong> — Turning off a PII pattern in Settings immediately removes its chips, badges, and findings — no reload required.</div></div>
+    <div class="cl-item imp"><div class="cl-ver">v1.2.0</div><div class="cl-text"><strong>PII Tab Search &amp; Filter</strong> — Search by parameter name, filter by severity (High / Medium / Low), and jump directly from a PII chip to that vendor's findings.</div></div>
+    <div class="cl-item imp"><div class="cl-ver">v1.2.0</div><div class="cl-text"><strong>Custom PII Patterns</strong> — Add named regex patterns with severity levels and a live test field. Industry-standard built-in patterns hardened (RFC 5322, NANP, LUHN-aware).</div></div>
+    <div class="cl-item fix"><div class="cl-ver">v1.2.0</div><div class="cl-text"><strong>Clear Button Fix</strong> — In-flight requests no longer re-populate the list after clear. Generation counter drops stale background messages.</div></div>
+    <div class="cl-item imp"><div class="cl-ver">v1.1.0</div><div class="cl-text"><strong>Light/Dark Theme + Font Size</strong> — Full theme switcher (Light/Dark) and font size controls (S/M/L) with preference persistence.</div></div>
+    <div class="cl-item imp"><div class="cl-ver">v1.1.0</div><div class="cl-text"><strong>Keyboard Nav + Regex Search</strong> — Arrow keys navigate the tag list. Search box accepts regex (toggle with /Re button). Resizable detail panel and expandable JSON objects.</div></div>
+  </div>
+</section>
+
 
 <!-- ══════════════════════════════════
      00 — ARCHITECTURE
@@ -68,47 +107,24 @@
     <div class="flow-arr">→</div>
     <div class="flow-node hi"><div class="flow-icon">🔒</div><div class="flow-name">PII Scan</div><div class="flow-sub">Regex patterns</div></div>
     <div class="flow-arr">→</div>
-    <div class="flow-node hi"><div class="flow-icon">✅</div><div class="flow-name">Whitelist</div><div class="flow-sub">Check allowlist</div></div>
+    <div class="flow-node hi"><div class="flow-icon">✅</div><div class="flow-name">Allow List</div><div class="flow-sub">Check approval</div></div>
     <div class="flow-arr">→</div>
-    <div class="flow-node hi"><div class="flow-icon">💾</div><div class="flow-name">Store</div><div class="flow-sub">IndexedDB session</div></div>
+    <div class="flow-node hi"><div class="flow-icon">💾</div><div class="flow-name">Store</div><div class="flow-sub">Session cache</div></div>
     <div class="flow-arr">→</div>
-    <div class="flow-node hi"><div class="flow-icon">🔔</div><div class="flow-name">Surface</div><div class="flow-sub">Popup + badge</div></div>
+    <div class="flow-node hi"><div class="flow-icon">🔔</div><div class="flow-name">Surface</div><div class="flow-sub">Panel + badge</div></div>
   </div>
 
   <div class="feat-grid">
-    <div class="feat-card">
-      <div class="feat-icon">🏷️</div>
-      <div class="feat-title">Vendor Library</div>
-      <div class="feat-body">Pre-built patterns for 80+ vendors: GA4, Adobe Analytics, Meta Pixel, TikTok, Google Ads, LinkedIn Insight, OneTrust, Hotjar, Segment, and more. Custom vendor patterns also supported.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">🔒</div>
-      <div class="feat-title">PII Detection</div>
-      <div class="feat-body">Configurable regex scanning across all query parameters and request bodies. Detects emails, phone numbers, SSNs, IP addresses, credit card patterns, and custom user-defined patterns. Severity-scored findings.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">📐</div>
-      <div class="feat-title">Baseline Diff Engine</div>
-      <div class="feat-body">Save any session as a named baseline. Future sessions are automatically diff'd against it — surfacing added tags, removed tags, and changed parameter values with color-coded severity.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">📤</div>
-      <div class="feat-title">Multi-Format Export</div>
-      <div class="feat-body">Export session data as CSV, JSON, HTML audit report, or HAR-compatible format. PII values can be redacted before export. Reports include diff sections and compliance-ready PII summaries.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">✅</div>
-      <div class="feat-title">Whitelist Manager</div>
-      <div class="feat-body">Define the approved vendor set per property. Any tag firing outside the whitelist is flagged immediately in the live view. Import/export whitelists as JSON to share with teammates.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-icon">💾</div>
-      <div class="feat-title">Session Storage</div>
-      <div class="feat-body">All sessions stored locally in IndexedDB with configurable retention limits. Sessions can be named, tagged, backed up, restored, and compared. Zero external data transmission.</div>
-    </div>
+    <div class="feat-card"><div class="feat-icon">🏷️</div><div class="feat-title">Vendor Library</div><div class="feat-body">Pre-built patterns for 80+ vendors: GA4, Adobe Analytics, Meta Pixel, TikTok, Google Ads, LinkedIn Insight, OneTrust, Hotjar, Segment, and more. Custom vendor patterns supported.</div></div>
+    <div class="feat-card"><div class="feat-icon">🔒</div><div class="feat-title">PII Detection</div><div class="feat-body">Configurable scanning across all params and request bodies. Industry-standard patterns for email (RFC 5322), phone (NANP), SSN, IP, credit cards, and DOB. Custom regex patterns with severity scoring.</div></div>
+    <div class="feat-card"><div class="feat-icon">📐</div><div class="feat-title">Baseline Diff Engine</div><div class="feat-body">Save any session as a named baseline. Future sessions diff against it — surfacing added tags, removed tags, and changed parameter values with color-coded severity.</div></div>
+    <div class="feat-card"><div class="feat-icon">📤</div><div class="feat-title">Multi-Format Export</div><div class="feat-body">Export as CSV (spreadsheet-ready), JSON (full session replay), HTML (client-facing audit report), or HAR (DevTools compatible). PII redaction available on export.</div></div>
+    <div class="feat-card"><div class="feat-icon">🗂️</div><div class="feat-title">Tab-Aware Sessions</div><div class="feat-body">Request list is tied to the browser tab, not the domain. Switching tabs preserves each tab's session in a per-tab cache — switching back restores instantly with no data loss.</div></div>
+    <div class="feat-card"><div class="feat-icon">🛡️</div><div class="feat-title">Allow List</div><div class="feat-body">Define approved vendors per environment. One-click Enable/Disable All for bulk management. Import/export JSON to standardize across team members and client projects.</div></div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 00 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      01 — LIVE FEED
@@ -119,14 +135,13 @@
     <div class="page-meta">
       <div class="page-tag">Primary View</div>
       <h2 class="page-title">Live Tag Feed</h2>
-      <p class="page-desc">The default view on popup open. Shows all intercepted network requests in real time, with vendor identification, status indicators, and instant filter controls. Click any row to expand its detail panel.</p>
+      <p class="page-desc">The default view on open. Shows all intercepted requests in real time with vendor identification, PII flags, allow-list status, and instant filter controls. Tied to the active browser tab — switching tabs switches sessions.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div>
-      <!-- Browser Chrome -->
       <div class="ext-frame w420">
         <div class="browser-bar">
           <div class="browser-dot bd-red"></div>
@@ -137,17 +152,14 @@
         <div class="popup-bar">
           <div class="popup-logo">TS</div>
           <div class="popup-name">Tag<span>Sentry</span></div>
-          <div class="recording-badge">
-            <div class="rec-dot live"></div>
-            Recording
-          </div>
+          <div class="recording-badge"><div class="rec-dot live"></div>Recording</div>
         </div>
         <div class="tab-rail">
           <div class="t-tab on"><div class="t-tab-icon">📡</div>Live<div class="t-badge">24</div></div>
           <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
           <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
           <div class="t-tab"><div class="t-tab-icon">🔒</div>PII<div class="t-badge red">3</div></div>
-          <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+          <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
           <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
           <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
         </div>
@@ -167,9 +179,10 @@
           </div>
           <div class="search-row">
             <div class="search-box">🔍 &nbsp;Filter tags, vendors, params…</div>
-            <div class="ic-btn on" title="Known vendors only">🏷️</div>
-            <div class="ic-btn" title="PII only">🔒</div>
-            <div class="ic-btn" title="Warnings only">⚠️</div>
+            <div class="ic-btn" style="font-size:9px;width:30px;color:var(--fog);font-family:var(--mono)">/Re</div>
+            <div class="ic-btn on">🏷️</div>
+            <div class="ic-btn">🔒</div>
+            <div class="ic-btn">⚠️</div>
           </div>
           <div class="tag-list scroll-clip">
             <div class="tag-row ok sel">
@@ -177,11 +190,7 @@
               <div class="tag-info">
                 <div class="tag-name">Google Analytics 4 — page_view</div>
                 <div class="tag-host">analytics.google.com/g/collect</div>
-                <div class="tag-chips">
-                  <span class="chip c-blue">GA4</span>
-                  <span class="chip c-green">200 OK</span>
-                  <span class="chip c-grey">page_view</span>
-                </div>
+                <div class="tag-chips"><span class="chip c-blue">Analytics</span><span class="chip c-green">200</span><span class="chip c-grey">page_view</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:04:01</div><div class="dot d-g"></div></div>
             </div>
@@ -190,11 +199,7 @@
               <div class="tag-info">
                 <div class="tag-name">Meta Pixel — Purchase</div>
                 <div class="tag-host">facebook.com/tr/</div>
-                <div class="tag-chips">
-                  <span class="chip c-blue">Meta</span>
-                  <span class="chip c-red">PII</span>
-                  <span class="chip c-green">200 OK</span>
-                </div>
+                <div class="tag-chips"><span class="chip c-blue">Advertising</span><span class="chip c-red" style="cursor:pointer" title="Click to view findings in PII tab">PII</span><span class="chip c-green">200</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:04:01</div><div class="dot d-r"></div></div>
             </div>
@@ -203,10 +208,7 @@
               <div class="tag-info">
                 <div class="tag-name">TikTok Pixel — ViewContent</div>
                 <div class="tag-host">analytics.tiktok.com/api/v2/pixel</div>
-                <div class="tag-chips">
-                  <span class="chip c-blue">TikTok</span>
-                  <span class="chip c-green">200 OK</span>
-                </div>
+                <div class="tag-chips"><span class="chip c-blue">Advertising</span><span class="chip c-green">200</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:04:00</div><div class="dot d-g"></div></div>
             </div>
@@ -215,10 +217,7 @@
               <div class="tag-info">
                 <div class="tag-name">Google Ads — Conversion</div>
                 <div class="tag-host">googleadservices.com/pagead/conversion</div>
-                <div class="tag-chips">
-                  <span class="chip c-blue">G Ads</span>
-                  <span class="chip c-amber">Unlisted</span>
-                </div>
+                <div class="tag-chips"><span class="chip c-blue">Advertising</span><span class="chip c-amber">Unlisted</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:04:00</div><div class="dot d-am"></div></div>
             </div>
@@ -227,10 +226,7 @@
               <div class="tag-info">
                 <div class="tag-name">Google Tag Manager</div>
                 <div class="tag-host">googletagmanager.com/gtm.js</div>
-                <div class="tag-chips">
-                  <span class="chip c-teal">Container</span>
-                  <span class="chip c-green">200 OK</span>
-                </div>
+                <div class="tag-chips"><span class="chip c-teal">Tag Mgmt</span><span class="chip c-green">200</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:03:58</div><div class="dot d-g"></div></div>
             </div>
@@ -238,43 +234,24 @@
         </div>
       </div>
       <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-        <span style="font-family:var(--mono);font-size:9px;color:var(--fog);background:var(--ink2);border:1px solid var(--rule);padding:3px 8px;border-radius:2px">Popup: 420 × 600px</span>
-        <span style="font-family:var(--mono);font-size:9px;color:var(--accent);background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.25);padding:3px 8px;border-radius:2px">Click row → detail panel opens below</span>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--fog);background:var(--ink2);border:1px solid var(--rule);padding:3px 8px;border-radius:2px">Side panel · 400px wide</span>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--accent);background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.25);padding:3px 8px;border-radius:2px">↑↓ keyboard navigation · / to focus search</span>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Status indicators</strong> use a colored left-border + status dot. <code>Green</code> = OK and whitelisted. <code>Amber</code> = known vendor but not in whitelist. <code>Red</code> = PII detected.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Stats bar</strong> gives instant totals — Total / OK / Warn / PII — updating in real time as new requests come in.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Filter bar</strong> supports free-text search across vendor name, hostname, and parameter values. Three toggle buttons add quick filters: known vendors only, PII-only, unlisted-only.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Toolbar</strong> controls recording state. <code>Stop / Record</code> pauses interception without clearing data. <code>Save</code> opens the session-naming modal. <code>Baseline ▾</code> dropdown runs a diff against saved baseline.</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">E</div>
-        <div class="ann-body"><strong>PII badge</strong> on the PII tab shows a live count. Clicking navigates directly to the PII audit view with all findings for the current session.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">F</div>
-        <div class="ann-body"><strong>Selected row</strong> highlighted with accent border. Detail panel slides open below the list — no separate navigation required.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Tab-aware sessions</strong> — the request list is tied to the browser tab ID, not the domain. Switching to another browser tab switches context; coming back instantly restores the previous list from cache.</div></div>
+      <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Stats bar</strong> updates live: Total / OK / Warn / PII. Counts only PII findings from <em>enabled</em> patterns — disabling a pattern immediately removes its contribution to all counts.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>PII chip</strong> on tag rows is clickable — it jumps to the PII tab pre-filtered to that vendor's findings. Chips only appear when the matching pattern is enabled in Settings.</div></div>
+      <div class="ann accent"><div class="ann-num">D</div><div class="ann-body"><strong>Regex search</strong> toggle (<code>/Re</code>) activates regex mode in the filter box. Syntax errors are caught and shown inline without crashing the filter.</div></div>
+      <div class="ann amber"><div class="ann-num">E</div><div class="ann-body"><strong>Toolbar:</strong> Stop/Record pauses without clearing. Clear wipes the session and the tab's cache entry. Save opens the session-naming modal. Baseline ▾ dropdown triggers a live diff.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 01 of 08</div>
 </div>
 
+
 <!-- ══════════════════════════════════
-     02 — TAG DETAIL PANEL
+     02 — TAG DETAIL
 ══════════════════════════════════════ -->
 <div class="page" id="detail">
   <div class="page-header">
@@ -282,7 +259,7 @@
     <div class="page-meta">
       <div class="page-tag">Inline Component</div>
       <h2 class="page-title">Tag Detail Panel</h2>
-      <p class="page-desc">Expands below the tag list when any row is selected. Parses the full request into tabbed views — query parameters, request body, raw headers, and the full raw URL. PII values are flagged inline.</p>
+      <p class="page-desc">Expands below the selected row. Parses the full request into tabbed sections — query parameters, POST body, raw headers, and the full URL. PII values are flagged inline. Panel height is draggable; nested JSON objects expand inline.</p>
     </div>
   </div>
   <div class="section-rule"></div>
@@ -291,25 +268,23 @@
     <div class="ext-frame w420">
       <div class="popup-bar">
         <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span> — Detail View</div>
+        <div class="popup-name">Tag<span>Sentry</span> — Detail</div>
       </div>
       <div class="popup-body">
-        <!-- Simulated selected tag row -->
         <div class="tag-row ok sel" style="margin-bottom:8px">
           <div class="vi vi-g">G</div>
           <div class="tag-info">
             <div class="tag-name">Google Analytics 4 — page_view</div>
             <div class="tag-host">analytics.google.com/g/collect</div>
-            <div class="tag-chips"><span class="chip c-blue">GA4</span><span class="chip c-green">200 OK</span><span class="chip c-grey">page_view</span></div>
+            <div class="tag-chips"><span class="chip c-blue">Analytics</span><span class="chip c-green">200</span><span class="chip c-grey">page_view</span></div>
           </div>
           <div class="tag-aside"><div class="tag-time">12:04:01</div><div class="dot d-g"></div></div>
         </div>
-
-        <!-- Detail Panel -->
         <div class="detail-panel">
           <div class="detail-head">
             <div class="vi vi-g" style="flex-shrink:0">G</div>
             <div style="font-size:11px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Google Analytics 4 — page_view</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--fog);margin-right:6px">⤢</div>
             <div class="detail-tabs">
               <div class="d-tab on">Params</div>
               <div class="d-tab">Body</div>
@@ -317,54 +292,34 @@
               <div class="d-tab">Raw</div>
             </div>
           </div>
+          <div class="resize-hint"></div>
           <div class="kv-table">
             <div class="kv-row"><div class="kv-k">v</div><div class="kv-v">2</div></div>
             <div class="kv-row"><div class="kv-k">tid</div><div class="kv-v">G-XXXXXXXXXX</div></div>
             <div class="kv-row"><div class="kv-k">en</div><div class="kv-v">page_view</div></div>
             <div class="kv-row"><div class="kv-k">ep.page_type</div><div class="kv-v">product_detail</div></div>
             <div class="kv-row"><div class="kv-k">ep.product_id</div><div class="kv-v">SKU-00842</div></div>
-            <div class="kv-row"><div class="kv-k">ul</div><div class="kv-v">en-us</div></div>
             <div class="kv-row">
               <div class="kv-k">uid</div>
-              <div class="kv-v pii">john.doe@example.com<span class="pii-tag">⚠ PII</span></div>
+              <div class="kv-v pii">user@example.com<span class="pii-tag">⚠ EMAIL</span></div>
             </div>
+            <div class="kv-row"><div class="kv-k">ul</div><div class="kv-v">en-us</div></div>
             <div class="kv-row"><div class="kv-k">_p</div><div class="kv-v">1234567890</div></div>
-            <div class="kv-row"><div class="kv-k">dr</div><div class="kv-v">https://google.com/</div></div>
           </div>
         </div>
-
-        <!-- Raw view (second tab state shown as hint) -->
-        <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--fog);font-style:italic">
-          ↑ Params tab active · Body / Headers / Raw tabs available
-        </div>
+        <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--fog);font-style:italic">↑ Drag resize handle · ⤢ to expand fullscreen · Body / Headers / Raw tabs available</div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Four tabs</strong> for parsing a request: <code>Params</code> (URL query string), <code>Body</code> (decoded POST body — JSON or form-encoded), <code>Headers</code> (request headers), <code>Raw</code> (full URL string).</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>PII values</strong> are highlighted in red with an inline <code>⚠ PII</code> badge directly beside the offending value. No separate screen needed — engineers see the issue immediately in context.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Key column</strong> is fixed width (130px) with word-break to handle long parameter names. Value column is full-width and wraps naturally.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Nested objects</strong> in JSON bodies are flattened using dot notation (e.g. <code>ecommerce.items.0.item_id</code>) for easy scanning.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">E</div>
-        <div class="ann-body"><strong>Panel height</strong> is capped at ~180px with an internal scrollbar so the popup doesn't overflow the viewport. The tag list remains visible above it.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Four detail tabs:</strong> <code>Params</code> (URL query string), <code>Body</code> (decoded POST body — JSON or form-encoded), <code>Headers</code>, and <code>Raw</code> (full URL). All sections shown stacked so nothing is hidden.</div></div>
+      <div class="ann rose"><div class="ann-num">B</div><div class="ann-body"><strong>PII values</strong> highlighted in red with an inline badge showing the matched pattern type (EMAIL, PHONE, SSN…). Only fires for enabled patterns — toggle a pattern off in Settings and the badge disappears immediately.</div></div>
+      <div class="ann accent"><div class="ann-num">C</div><div class="ann-body"><strong>Resizable panel</strong> — drag the resize bar to set height. The <code>⤢</code> expand button stretches the panel to 85% of viewport for deep inspection. Both states persist until the next selection.</div></div>
+      <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Nested JSON objects</strong> render as expandable tree nodes inline. Click the caret to expand or collapse without losing your place in the param list.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 02 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      03 — SESSIONS
@@ -375,24 +330,20 @@
     <div class="page-meta">
       <div class="page-tag">Session Management</div>
       <h2 class="page-title">Saved Sessions</h2>
-      <p class="page-desc">All saved sessions with metadata, status chips, and quick actions. One session can be pinned as the current baseline. Any session can be compared against baseline or another session via the Diff view.</p>
+      <p class="page-desc">All saved sessions with metadata, status chips, and quick actions. One session can be pinned as the baseline for diff comparisons. Any two sessions can be compared via the Diff tab.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot idle"></div>Idle</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot idle"></div>Idle</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab on"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab"><div class="t-tab-icon">🔒</div>PII</div>
-        <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
@@ -401,69 +352,33 @@
           <div class="search-box">🔍 &nbsp;Search sessions…</div>
           <div class="ic-btn">↕️</div>
         </div>
-
         <div class="sess-item baseline">
           <div class="sess-icon">📌</div>
           <div class="sess-info">
             <div class="sess-name">Production Baseline — Checkout Flow</div>
             <div class="sess-meta">shop.example.com · Jun 1 · 31 tags</div>
-            <div class="sess-chips">
-              <span class="chip c-blue">BASELINE</span>
-              <span class="chip c-green">Clean</span>
-            </div>
+            <div class="sess-chips"><span class="chip c-blue">BASELINE</span><span class="chip c-green">✓ Clean</span></div>
           </div>
-          <div class="sess-actions">
-            <div class="s-btn">Load</div>
-            <div class="s-btn p">Compare ▾</div>
-          </div>
+          <div class="sess-actions"><div class="s-btn p">Compare ▾</div><div class="s-btn">⋯</div></div>
         </div>
-
         <div class="sess-item">
           <div class="sess-icon">📋</div>
           <div class="sess-info">
-            <div class="sess-name">Staging — Sprint 42 Deploy</div>
-            <div class="sess-meta">staging.example.com · Today 11:58 · 28 tags</div>
-            <div class="sess-chips">
-              <span class="chip c-red">3 PII</span>
-              <span class="chip c-amber">2 Missing</span>
-            </div>
+            <div class="sess-name">Staging · Sprint 42</div>
+            <div class="sess-meta">staging.example.com · Today · 28 tags</div>
+            <div class="sess-chips"><span class="chip c-red">2 PII</span><span class="chip c-amber">3 changed</span></div>
           </div>
-          <div class="sess-actions">
-            <div class="s-btn">Load</div>
-            <div class="s-btn p">Compare ▾</div>
-          </div>
+          <div class="sess-actions"><div class="s-btn p">Compare ▾</div><div class="s-btn">Load</div><div class="s-btn">⋯</div></div>
         </div>
-
         <div class="sess-item">
           <div class="sess-icon">📋</div>
           <div class="sess-info">
-            <div class="sess-name">QA Run — Homepage</div>
-            <div class="sess-meta">qa.example.com · Yesterday 16:22 · 18 tags</div>
-            <div class="sess-chips">
-              <span class="chip c-green">Clean</span>
-            </div>
+            <div class="sess-name">Dev — Feature/checkout-v2</div>
+            <div class="sess-meta">dev.example.com · Yesterday · 19 tags</div>
+            <div class="sess-chips"><span class="chip c-green">✓ Clean</span></div>
           </div>
-          <div class="sess-actions">
-            <div class="s-btn">Load</div>
-            <div class="s-btn p">Compare ▾</div>
-          </div>
+          <div class="sess-actions"><div class="s-btn p">Compare ▾</div><div class="s-btn">Load</div><div class="s-btn">⋯</div></div>
         </div>
-
-        <div class="sess-item">
-          <div class="sess-icon">📋</div>
-          <div class="sess-info">
-            <div class="sess-name">Dev — New TikTok Integration</div>
-            <div class="sess-meta">localhost:3000 · May 30 · 9 tags</div>
-            <div class="sess-chips">
-              <span class="chip c-grey">Draft</span>
-            </div>
-          </div>
-          <div class="sess-actions">
-            <div class="s-btn">Load</div>
-            <div class="s-btn">⋯</div>
-          </div>
-        </div>
-
         <div class="toolbar" style="margin-top:10px;background:transparent;padding:0;border:none">
           <div class="tb-btn primary">▶ New Recording</div>
           <div class="tb-btn danger">🗑 Delete</div>
@@ -472,28 +387,16 @@
         </div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Baseline is pinned</strong> with a 📌 icon and an indigo-accented border. Only one session is baseline at a time. Setting a new one prompts confirmation to prevent accidental replacement.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Status chips</strong> give at-a-glance health: PII count, missing tags vs. baseline, or a clean green check. These derive from the stored session's piiFindings and diff metadata.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Compare ▾ dropdown</strong> lets user choose: <em>vs. Baseline</em>, <em>vs. another session</em>, or opens the full Diff tab pre-populated with the selected session as Session B.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Sessions are stored</strong> in browser <code>IndexedDB</code> — no external server. Maximum count is configurable (default 50). Full backup/restore via JSON for cross-machine or team sharing.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Baseline session</strong> is pinned with 📌 and an accent border. Only one baseline at a time. Setting a new baseline prompts confirmation to prevent accidental replacement.</div></div>
+      <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Status chips</strong> give at-a-glance health: PII count, diff changes vs. baseline, or a clean green check. These derive from stored piiFindings and diff metadata.</div></div>
+      <div class="ann amber"><div class="ann-num">C</div><div class="ann-body"><strong>Compare ▾</strong> dropdown lets the user choose: vs. Baseline, vs. another session, or opens the Diff tab pre-populated. Any two sessions can be compared directly.</div></div>
+      <div class="ann jade"><div class="ann-num">D</div><div class="ann-body"><strong>Sessions are stored locally</strong> in <code>chrome.storage.local</code>. Max count is configurable (default 50). Full backup/restore via JSON for cross-machine sharing.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 03 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      04 — DIFF VIEW
@@ -504,29 +407,24 @@
     <div class="page-meta">
       <div class="page-tag">Session Comparison</div>
       <h2 class="page-title">Diff View</h2>
-      <p class="page-desc">Compare any two sessions. The diff engine groups requests by vendor, then reports: tags added, tags removed, and parameter-level changes. Color-coded for instant triage by severity.</p>
+      <p class="page-desc">Compare any two sessions. Groups requests by vendor, then reports added tags, removed tags, and parameter-level changes. Color-coded for instant triage.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot idle"></div>Idle</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot idle"></div>Idle</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab on"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab"><div class="t-tab-icon">🔒</div>PII</div>
-        <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
       <div class="popup-body">
-        <!-- Session selectors -->
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
           <div style="flex:1">
             <span class="small-label">Session A (baseline)</span>
@@ -538,87 +436,32 @@
             <div style="background:var(--ink);border:1px solid var(--rule2);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:10px;color:var(--mist)">Staging · Sprint 42 ▾</div>
           </div>
         </div>
-
-        <!-- Summary chips + run btn -->
         <div style="display:flex;gap:5px;margin-bottom:9px;align-items:center;flex-wrap:wrap">
           <span class="chip c-red" style="font-size:9px;padding:3px 7px">3 removed</span>
           <span class="chip c-green" style="font-size:9px;padding:3px 7px">1 added</span>
           <span class="chip c-amber" style="font-size:9px;padding:3px 7px">4 changed</span>
-          <div class="tb-spacer"></div>
+          <div style="flex:1"></div>
           <div class="tb-btn" style="font-size:9px">📤 Export Diff</div>
         </div>
-
-        <!-- Diff list -->
         <div class="scroll-clip">
-          <div class="diff-row rem">
-            <div class="diff-mark m-minus">−</div>
-            <div class="diff-content">
-              <b>LinkedIn Insight Tag</b> — removed entirely<br>
-              <span style="color:var(--fog)">Vendor:</span> <span style="color:var(--rose)">snap.licdn.com</span>
-            </div>
-            <span class="chip c-red" style="flex-shrink:0">Missing</span>
-          </div>
-          <div class="diff-row rem">
-            <div class="diff-mark m-minus">−</div>
-            <div class="diff-content">
-              <b>OneTrust CMP</b> — not detected on staging<br>
-              <span style="color:var(--fog)">⚠ Consent manager missing</span>
-            </div>
-            <span class="chip c-red" style="flex-shrink:0">Critical</span>
-          </div>
-          <div class="diff-row add">
-            <div class="diff-mark m-plus">+</div>
-            <div class="diff-content">
-              <b>Bing UET Tag</b> — new tag detected<br>
-              <span style="color:var(--fog)">URL:</span> <span style="color:#34d399">bat.bing.com/action/0</span>
-            </div>
-            <span class="chip c-amber" style="flex-shrink:0">Unlisted</span>
-          </div>
-          <div class="diff-row chg">
-            <div class="diff-mark m-wave">~</div>
-            <div class="diff-content">
-              <b>Meta Pixel · Purchase</b> — param changed<br>
-              <span style="color:var(--fog)">value: </span><span class="old">99.99</span><span class="new">undefined</span>
-            </div>
-            <span class="chip c-red" style="flex-shrink:0">⚠ Critical</span>
-          </div>
-          <div class="diff-row chg">
-            <div class="diff-mark m-wave">~</div>
-            <div class="diff-content">
-              <b>GA4 · page_view</b> — param changed<br>
-              <span style="color:var(--fog)">ep.page_type: </span><span class="old">product_detail</span><span class="new">pdp</span>
-            </div>
-            <span class="chip c-amber" style="flex-shrink:0">Changed</span>
-          </div>
+          <div class="diff-row rem"><div class="diff-mark m-minus">−</div><div class="diff-content"><b>LinkedIn Insight Tag</b> — removed entirely<br><span style="color:var(--fog)">Vendor:</span> <span style="color:var(--rose)">snap.licdn.com</span></div><span class="chip c-red" style="flex-shrink:0">Missing</span></div>
+          <div class="diff-row rem"><div class="diff-mark m-minus">−</div><div class="diff-content"><b>OneTrust CMP</b> — not detected on staging<br><span style="color:var(--fog)">⚠ Consent manager missing</span></div><span class="chip c-red" style="flex-shrink:0">Critical</span></div>
+          <div class="diff-row add"><div class="diff-mark m-plus">+</div><div class="diff-content"><b>Bing UET Tag</b> — new tag detected<br><span style="color:var(--fog)">URL:</span> <span style="color:#34d399">bat.bing.com/action/0</span></div><span class="chip c-amber" style="flex-shrink:0">Unlisted</span></div>
+          <div class="diff-row chg"><div class="diff-mark m-wave">~</div><div class="diff-content"><b>Meta Pixel · Purchase</b> — param changed<br><span style="color:var(--fog)">value: </span><span class="old">99.99</span><span class="new">undefined</span></div><span class="chip c-red" style="flex-shrink:0">⚠ Critical</span></div>
+          <div class="diff-row chg"><div class="diff-mark m-wave">~</div><div class="diff-content"><b>GA4 · page_view</b> — param changed<br><span style="color:var(--fog)">ep.page_type: </span><span class="old">product_detail</span><span class="new">pdp</span></div><span class="chip c-amber" style="flex-shrink:0">Changed</span></div>
         </div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Session selectors</strong> are dropdown inputs. Session A defaults to the saved baseline if one exists. Both can be any stored session for arbitrary cross-session comparison.</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Color semantics:</strong> <code style="color:var(--rose)">Red</code> = removed or critical issue. <code style="color:#34d399">Green</code> = added. <code style="color:var(--amber)">Amber</code> = changed value or unlisted new tag. Each has a left-border stripe for color-blind accessibility.</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Critical flags</strong> are surfaced for high-impact issues: missing CMP/consent layer, undefined purchase event values, or new completely unrecognized tags.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Parameter-level diffs</strong> show the exact old and new values side-by-side (old in red strikethrough, new in green). Useful for catching silent regressions in naming conventions or value formats.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">E</div>
-        <div class="ann-body"><strong>Export Diff</strong> generates a standalone report of all changes — ideal for sharing with developers, QA leads, or clients as a validation sign-off document.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Session selectors</strong> default Session A to the saved baseline. Both can be any stored session for arbitrary cross-session comparison.</div></div>
+      <div class="ann rose"><div class="ann-num">B</div><div class="ann-body"><strong>Color semantics:</strong> <code style="color:var(--rose)">Red</code> = removed or critical. <code style="color:#34d399">Green</code> = added. <code style="color:var(--amber)">Amber</code> = changed or unlisted. Left-border stripes provide color-blind accessibility.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>Critical flags</strong> are raised for high-impact issues: missing CMP/consent layer, undefined purchase event values, or newly unrecognized tags.</div></div>
+      <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Parameter-level diffs</strong> show exact old/new values side-by-side (old in red strikethrough, new in green) — catches silent regressions in naming or value formats.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 04 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      05 — PII AUDIT
@@ -628,179 +471,148 @@
     <div class="page-num-large">05</div>
     <div class="page-meta">
       <div class="page-tag">Compliance View</div>
-      <h2 class="page-title">PII Audit</h2>
-      <p class="page-desc">All personally identifiable information detected across the current session, grouped by severity. Exportable as a standalone compliance report for GDPR/CCPA review, handoff to legal, or client sign-off.</p>
+      <h2 class="page-title">PII Audit <span class="new-badge">Updated</span></h2>
+      <p class="page-desc">All personally identifiable information detected in the session, grouped by severity. Search findings by param name, filter by severity level, or drill in from a PII chip on any tag row. Only enabled patterns contribute findings.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot live"></div>Recording</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot live"></div>Recording</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab on"><div class="t-tab-icon">🔒</div>PII<div class="t-badge red">3</div></div>
-        <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
       <div class="popup-body">
+        <!-- Search + severity filters — NEW in v1.2 -->
+        <div class="pii-filter-row">
+          <div class="search-box" style="font-size:10px;padding:4px 9px">🔍 &nbsp;Search params…</div>
+          <div class="pii-sev-btn on">HIGH</div>
+          <div class="pii-sev-btn">MED</div>
+          <div class="pii-sev-btn">LOW</div>
+        </div>
+        <!-- Vendor filter banner — shown when navigating from a PII chip -->
+        <div class="pii-vendor-banner">
+          Showing: <strong>Meta Pixel</strong> &nbsp;·&nbsp; 2 of 3 findings
+          <div class="pii-clear-btn">✕ Clear filter</div>
+        </div>
         <div class="pii-alert">
           <div class="pii-alert-title">⚠ 3 PII Issues Detected</div>
-          <div class="pii-alert-body">Personal data found in tag payloads. Review each finding and confirm legal basis and consent coverage before production deployment.</div>
+          <div class="pii-alert-body">Personal data found in tag payloads. Only findings from enabled detection patterns are shown.</div>
         </div>
-
-        <span class="small-label">Findings · Current Session</span>
-
         <div class="pii-row">
           <div class="sev-badge sev-h">HIGH</div>
           <div class="pii-det">
-            <div class="pii-param">uid → john.doe@example.com</div>
+            <div class="pii-param">uid → user@example.com</div>
             <div class="pii-val">Pattern: Email address (RFC 5322)</div>
-            <div class="pii-src">Tag: Google Analytics 4 · req_12:04:01</div>
+            <div class="pii-src">Tag: Google Analytics 4 · 12:04:01</div>
           </div>
         </div>
-
         <div class="pii-row">
           <div class="sev-badge sev-h">HIGH</div>
           <div class="pii-det">
-            <div class="pii-param">em → a8d3f1… (hashed email)</div>
-            <div class="pii-val">Pattern: Hashed email (Meta CAPI)</div>
-            <div class="pii-src">Tag: Meta Pixel · req_12:04:01</div>
+            <div class="pii-param">em → a8d3f1c2… (hashed email)</div>
+            <div class="pii-val">Pattern: Email address</div>
+            <div class="pii-src">Tag: Meta Pixel · 12:04:01</div>
           </div>
         </div>
-
         <div class="pii-row">
           <div class="sev-badge sev-m">MED</div>
           <div class="pii-det">
             <div class="pii-param">ph → +1-555-867-5309</div>
-            <div class="pii-val">Pattern: US phone number (E.164)</div>
-            <div class="pii-src">Tag: Meta Pixel · req_12:04:01</div>
+            <div class="pii-val">Pattern: US phone number (NANP)</div>
+            <div class="pii-src">Tag: Meta Pixel · 12:04:01</div>
           </div>
         </div>
-
         <div class="toolbar" style="margin-top:10px;background:transparent;padding:0;border:none">
           <div class="tb-btn primary">📄 Export PII Report</div>
           <div class="tb-btn">⚙️ Configure Patterns</div>
         </div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann rose">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Severity levels:</strong> <code>HIGH</code> — clear PII (email, SSN, phone number, credit card). <code>MEDIUM</code> — likely PII or hashed PII (hashed emails, partial identifiers). <code>LOW</code> — potential PII patterns (long numeric IDs, possible dates of birth).</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Each finding</strong> surfaces the exact parameter key, the detected value (truncated for display), the detection pattern used for transparency, and the originating tag request ID.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Configure Patterns</strong> opens a modal for adding custom regex patterns — useful for internal user IDs, loyalty card numbers, or other domain-specific PII unique to your organization.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>PII Report export</strong> generates a structured PDF or JSON file with all findings, timestamps, severity ratings, and associated tag metadata — formatted for compliance documentation.</div>
-      </div>
+      <div class="ann rose"><div class="ann-num">A</div><div class="ann-body"><strong>Severity filter buttons</strong> (High / Med / Low) narrow findings instantly. Can be combined. Paired with the search box for param-name lookup across large sessions.</div></div>
+      <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Vendor filter banner</strong> appears when arriving via a PII chip click — shows which vendor's findings are active and offers a one-click "Clear filter" to restore the full session view.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>Disabled patterns contribute nothing.</strong> Turn off the Email pattern in Settings and all email findings vanish from the list, the badge count, and the stats bar — instantly, without a reload.</div></div>
+      <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Custom patterns</strong> open a modal editor with name, regex, severity, and a live test field. Custom patterns with the same ID as a built-in pattern override the built-in one.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 05 of 08</div>
 </div>
 
+
 <!-- ══════════════════════════════════
-     06 — WHITELIST
+     06 — ALLOW LIST
 ══════════════════════════════════════ -->
-<div class="page" id="whitelist">
+<div class="page" id="allowlist">
   <div class="page-header">
     <div class="page-num-large">06</div>
     <div class="page-meta">
       <div class="page-tag">Allowlist Management</div>
-      <h2 class="page-title">Tag Whitelist</h2>
-      <p class="page-desc">Define the approved set of vendors for a given property or environment. Tags outside the whitelist are flagged amber in the live feed. Import and export whitelists as JSON to standardize across teams and environments.</p>
+      <h2 class="page-title">Allow List <span class="new-badge">Updated</span></h2>
+      <p class="page-desc">Define the approved set of vendors for a property or environment. Tags outside the list are flagged amber in the live feed. One-click Enable / Disable All for bulk management. Import and export JSON to standardize across teams.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot live"></div>Recording</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot live"></div>Recording</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab"><div class="t-tab-icon">🔒</div>PII</div>
-        <div class="t-tab on"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab on"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
       <div class="popup-body">
-        <div class="search-row" style="margin-bottom:10px">
-          <div class="search-box">🔍 &nbsp;Search vendors…</div>
-          <div class="tb-btn primary" style="padding:5px 9px;font-size:9px;flex-shrink:0">+ Add Vendor</div>
+        <!-- Toolbar with Enable All — NEW in v1.3 -->
+        <div class="wl-toolbar">
+          <div class="search-box" style="font-size:10px;padding:4px 9px">🔍 &nbsp;Search vendors…</div>
+          <div class="wl-toggle-all">Enable All</div>
+          <div class="tb-btn primary" style="padding:4px 8px;font-size:9px;flex-shrink:0">+ Add</div>
         </div>
-
         <div class="wl-cat">
           <div class="wl-cat-title">Analytics <span class="chip c-green" style="font-size:8px">2 / 2</span></div>
-          <div class="wl-item"><div class="vi vi-g" style="flex-shrink:0">G</div><div class="wl-name">Google Analytics 4</div><div class="wl-domain">analytics.google.com</div><div class="toggle-track on"></div></div>
-          <div class="wl-item"><div class="vi vi-aa" style="flex-shrink:0">Aa</div><div class="wl-name">Adobe Analytics</div><div class="wl-domain">omtrdc.net</div><div class="toggle-track on"></div></div>
+          <div class="wl-item"><div class="vi vi-g" style="flex-shrink:0">G</div><div class="wl-name">Google Analytics 4</div><div class="toggle-track on"></div></div>
+          <div class="wl-item"><div class="vi vi-un" style="flex-shrink:0">Aa</div><div class="wl-name">Adobe Analytics</div><div class="toggle-track on"></div></div>
         </div>
-
         <div class="wl-cat">
           <div class="wl-cat-title">Advertising <span class="chip c-amber" style="font-size:8px">3 / 4</span></div>
-          <div class="wl-item"><div class="vi vi-fb" style="flex-shrink:0">f</div><div class="wl-name">Meta Pixel</div><div class="wl-domain">facebook.com</div><div class="toggle-track on"></div></div>
-          <div class="wl-item"><div class="vi vi-tt" style="flex-shrink:0">T</div><div class="wl-name">TikTok Pixel</div><div class="wl-domain">analytics.tiktok.com</div><div class="toggle-track on"></div></div>
-          <div class="wl-item"><div class="vi vi-ga" style="flex-shrink:0">A</div><div class="wl-name">Google Ads</div><div class="wl-domain">googleadservices.com</div><div class="toggle-track on"></div></div>
-          <div class="wl-item" style="opacity:0.45"><div class="vi vi-li" style="flex-shrink:0">Li</div><div class="wl-name">LinkedIn Insight</div><div class="wl-domain">snap.licdn.com</div><div class="toggle-track off"></div></div>
+          <div class="wl-item"><div class="vi vi-fb" style="flex-shrink:0">f</div><div class="wl-name">Meta Pixel</div><div class="toggle-track on"></div></div>
+          <div class="wl-item"><div class="vi vi-tt" style="flex-shrink:0">T</div><div class="wl-name">TikTok Pixel</div><div class="toggle-track on"></div></div>
+          <div class="wl-item"><div class="vi vi-ga" style="flex-shrink:0">A</div><div class="wl-name">Google Ads</div><div class="toggle-track on"></div></div>
+          <div class="wl-item dim"><div class="vi vi-un" style="flex-shrink:0">Li</div><div class="wl-name">LinkedIn Insight</div><div class="toggle-track off"></div></div>
         </div>
-
         <div class="wl-cat">
           <div class="wl-cat-title">Tag Management <span class="chip c-green" style="font-size:8px">1 / 1</span></div>
-          <div class="wl-item"><div class="vi vi-gt" style="flex-shrink:0">▷</div><div class="wl-name">Google Tag Manager</div><div class="wl-domain">googletagmanager.com</div><div class="toggle-track on"></div></div>
+          <div class="wl-item"><div class="vi vi-gt" style="flex-shrink:0">▷</div><div class="wl-name">Google Tag Manager</div><div class="toggle-track on"></div></div>
         </div>
-
         <div class="toolbar" style="margin-top:8px;background:transparent;padding:0;border:none">
           <div class="tb-btn">📥 Import JSON</div>
           <div class="tb-btn">📤 Export JSON</div>
         </div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Per-vendor toggles</strong> instantly mark that vendor as allowed or flagged in the live feed. The toggle state is persisted across sessions and applied immediately to any active recording.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Grouped by category:</strong> Analytics, Advertising, Tag Management, Consent / CMP, Heatmaps, A/B Testing, CDP. Category header shows a chip indicating how many are active vs. total.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Disabled vendors</strong> (toggled off) are shown at reduced opacity so the user can see what's excluded without losing orientation. They still appear in the live feed, but are flagged amber.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Import/Export JSON</strong> lets consultants maintain a shared, versioned whitelist per client or project. Custom vendor entries (including URL-pattern-only entries) are included in the export.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">E</div>
-        <div class="ann-body"><strong>Add Vendor</strong> opens a modal with name, URL pattern, and category fields. Pattern is used for matching against request hostnames. Supports wildcard and substring matching.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Per-vendor toggles</strong> instantly mark a vendor as allowed or flagged in the live feed. State persists across sessions and is applied immediately to any active recording.</div></div>
+      <div class="ann jade"><div class="ann-num">B</div><div class="ann-body"><strong>Enable / Disable All</strong> button bulk-toggles every vendor at once. The label reads "Enable All" (green) when anything is disabled, and "Disable All" (red) when everything is on. Saves immediately.</div></div>
+      <div class="ann amber"><div class="ann-num">C</div><div class="ann-body"><strong>Disabled vendors</strong> are shown at reduced opacity so the user can see what's excluded without losing orientation. They still appear in the live feed, flagged amber.</div></div>
+      <div class="ann jade"><div class="ann-num">D</div><div class="ann-body"><strong>Import/Export JSON</strong> lets consultants maintain a shared, versioned allow list per client or project. Custom vendor entries are included in the export.</div></div>
+      <div class="ann accent"><div class="ann-num">E</div><div class="ann-body"><strong>Add Vendor</strong> opens a modal with name, URL pattern, and category fields. Pattern is matched against request hostnames. Supports wildcard and substring matching.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 06 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      07 — EXPORT
@@ -809,26 +621,22 @@
   <div class="page-header">
     <div class="page-num-large">07</div>
     <div class="page-meta">
-      <div class="page-tag">Export & Share</div>
+      <div class="page-tag">Export &amp; Share</div>
       <h2 class="page-title">Export</h2>
-      <p class="page-desc">Export session data in four formats for different audiences: a developer-friendly CSV, machine-readable JSON, a client-facing HTML audit report, or a HAR-compatible file for developer tools. PII can be redacted on export.</p>
+      <p class="page-desc">Export session data in four formats for different audiences: developer-friendly CSV, machine-readable JSON, a client-facing HTML audit report, or HAR for DevTools. PII can be redacted on export.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot idle"></div>Idle</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot idle"></div>Idle</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab"><div class="t-tab-icon">🔒</div>PII</div>
-        <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab on"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
@@ -836,53 +644,30 @@
         <span class="small-label">Format</span>
         <div class="export-grid" style="margin-bottom:14px">
           <div class="ex-card sel"><div class="ex-icon">📊</div><div class="ex-name">CSV</div><div class="ex-desc">One row per request</div></div>
-          <div class="ex-card"><div class="ex-icon">📄</div><div class="ex-name">JSON</div><div class="ex-desc">Full session + raw data</div></div>
+          <div class="ex-card"><div class="ex-icon">📄</div><div class="ex-name">JSON</div><div class="ex-desc">Full session + payloads</div></div>
           <div class="ex-card"><div class="ex-icon">📋</div><div class="ex-name">HTML Report</div><div class="ex-desc">Formatted audit doc</div></div>
           <div class="ex-card"><div class="ex-icon">🔧</div><div class="ex-name">HAR</div><div class="ex-desc">DevTools compatible</div></div>
         </div>
-
         <span class="small-label">Options</span>
         <div style="background:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:2px 10px;margin-bottom:12px">
-          <div class="setting-row">
-            <div><div class="setting-label">Include raw payloads</div></div>
-            <div class="toggle-track on"></div>
-          </div>
-          <div class="setting-row">
-            <div><div class="setting-label">Redact PII values</div><div class="setting-sub">Replaces PII with [REDACTED]</div></div>
-            <div class="toggle-track on"></div>
-          </div>
-          <div class="setting-row">
-            <div><div class="setting-label">Include diff vs baseline</div></div>
-            <div class="toggle-track off"></div>
-          </div>
+          <div class="setting-row"><div><div class="setting-label">Include raw payloads</div></div><div class="toggle-track on"></div></div>
+          <div class="setting-row"><div><div class="setting-label">Redact PII values</div><div class="setting-sub">Replaces PII with [REDACTED]</div></div><div class="toggle-track on"></div></div>
+          <div class="setting-row"><div><div class="setting-label">Include diff vs baseline</div></div><div class="toggle-track off"></div></div>
         </div>
-
         <div class="tb-btn primary" style="width:100%;justify-content:center;display:flex;font-size:11px;padding:7px">📤 Export Session</div>
         <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--fog);margin-top:6px">24 requests · 3 PII findings</div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>CSV</strong> is best for sharing with developers or importing into Google Sheets. Columns: Timestamp, Vendor, Category, Event, Hostname, URL, Status Code, PII Detected, Whitelisted.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>JSON Full</strong> is the complete machine-readable session. Can be re-imported into TagSentry on another machine, or used in programmatic comparison pipelines.</div>
-      </div>
-      <div class="ann accent">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>HTML Report</strong> is a self-contained, client-ready audit document with vendor summary table, parameter details, PII findings section, and — if enabled — diff vs. baseline.</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Redact PII toggle</strong> replaces detected PII values with <code>[REDACTED]</code> before writing any export file. Always-on recommendation for client-shared documents.</div>
-      </div>
+      <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>CSV</strong> is best for sharing with developers or importing into Google Sheets. Columns: Timestamp, Vendor, Category, Event, Hostname, URL, Status Code, PII Detected, Whitelisted.</div></div>
+      <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>JSON Full</strong> is the complete machine-readable session. Can be re-imported into TagSentry on another machine, or used in programmatic comparison pipelines.</div></div>
+      <div class="ann accent"><div class="ann-num">C</div><div class="ann-body"><strong>HTML Report</strong> is a self-contained, client-ready audit document with vendor summary table, parameter details, PII findings, and — if enabled — a diff vs. baseline section.</div></div>
+      <div class="ann rose"><div class="ann-num">D</div><div class="ann-body"><strong>Redact PII</strong> replaces all detected PII values with <code>[REDACTED]</code> before writing any export. Recommended for all client-shared documents.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 07 of 08</div>
 </div>
+
 
 <!-- ══════════════════════════════════
      08 — SETTINGS
@@ -892,86 +677,93 @@
     <div class="page-num-large">08</div>
     <div class="page-meta">
       <div class="page-tag">Configuration</div>
-      <h2 class="page-title">Settings</h2>
-      <p class="page-desc">Global extension preferences: recording behavior, PII detection toggles, session storage limits, and data management. All settings are persisted in <code style="font-family:var(--mono);font-size:12px;background:var(--ink2);padding:1px 5px;border-radius:2px;color:#818cf8">chrome.storage.local</code>.</p>
+      <h2 class="page-title">Settings <span class="new-badge">Updated</span></h2>
+      <p class="page-desc">Global preferences: recording behavior, appearance (theme + font size), PII detection toggles, custom patterns, session storage, and data management. The version badge reads live from the installed manifest.</p>
     </div>
   </div>
   <div class="section-rule"></div>
 
   <div class="two-col">
     <div class="ext-frame w420">
-      <div class="popup-bar">
-        <div class="popup-logo">TS</div>
-        <div class="popup-name">Tag<span>Sentry</span></div>
-        <div class="recording-badge"><div class="rec-dot idle"></div>Idle</div>
-      </div>
+      <div class="popup-bar"><div class="popup-logo">TS</div><div class="popup-name">Tag<span>Sentry</span></div><div class="recording-badge"><div class="rec-dot idle"></div>Idle</div></div>
       <div class="tab-rail">
         <div class="t-tab"><div class="t-tab-icon">📡</div>Live</div>
         <div class="t-tab"><div class="t-tab-icon">💾</div>Sessions</div>
         <div class="t-tab"><div class="t-tab-icon">⚖️</div>Diff</div>
         <div class="t-tab"><div class="t-tab-icon">🔒</div>PII</div>
-        <div class="t-tab"><div class="t-tab-icon">✅</div>Whitelist</div>
+        <div class="t-tab"><div class="t-tab-icon">✅</div>Allow</div>
         <div class="t-tab"><div class="t-tab-icon">📤</div>Export</div>
         <div class="t-tab on"><div class="t-tab-icon">⚙️</div>Settings</div>
       </div>
       <div class="popup-body">
-        <div style="margin-bottom:14px">
+        <div style="margin-bottom:12px">
+          <div class="settings-section-head">Appearance</div>
+          <div class="setting-row">
+            <div><div class="setting-label">Theme</div><div class="setting-sub">Default: Light</div></div>
+            <div class="theme-row">
+              <div class="theme-swatch sw-light active"><div class="ts-bar"></div><div class="ts-body">Light</div></div>
+              <div class="theme-swatch sw-dark"><div class="ts-bar"></div><div class="ts-body">Dark</div></div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div><div class="setting-label">Font size</div><div class="setting-sub">Default: Large</div></div>
+            <div style="display:flex;gap:4px">
+              <div class="s-btn" style="font-size:9px">S</div>
+              <div class="s-btn" style="font-size:9px">M</div>
+              <div class="s-btn p" style="font-size:9px">L</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px">
           <div class="settings-section-head">Recording</div>
           <div class="setting-row"><div><div class="setting-label">Auto-start on page load</div><div class="setting-sub">Begin recording without clicking Record</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">Known vendors only</div><div class="setting-sub">Hide unrecognized requests from feed</div></div><div class="toggle-track off"></div></div>
           <div class="setting-row"><div><div class="setting-label">Max stored sessions</div></div><div class="input-num">50</div></div>
         </div>
-        <div style="margin-bottom:14px">
+        <div style="margin-bottom:12px">
           <div class="settings-section-head">PII Detection</div>
           <div class="setting-row"><div><div class="setting-label">Email addresses</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">Phone numbers</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">IP addresses</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">SSN patterns</div></div><div class="toggle-track on"></div></div>
-          <div class="setting-row"><div><div class="setting-label">Custom regex patterns</div><div class="setting-sub">3 patterns configured</div></div><div class="s-btn p">Edit →</div></div>
+          <div class="setting-row"><div><div class="setting-label">Credit / debit cards</div></div><div class="toggle-track on"></div></div>
+          <div class="setting-row"><div><div class="setting-label">Custom patterns</div><div class="setting-sub">2 patterns configured</div></div><div class="s-btn p">Edit →</div></div>
         </div>
-        <div>
+        <div style="margin-bottom:12px">
           <div class="settings-section-head">Data Management</div>
-          <div class="setting-row"><div><div class="setting-label">Export all sessions</div></div><div class="s-btn">📦 Backup</div></div>
-          <div class="setting-row"><div><div class="setting-label">Import sessions</div></div><div class="s-btn">📥 Restore</div></div>
-          <div class="setting-row"><div><div class="setting-label">Clear all data</div><div class="setting-sub">Wipes sessions, settings, whitelist</div></div><div class="s-btn" style="color:var(--rose);border-color:rgba(220,38,38,0.3)">🗑 Clear</div></div>
+          <div class="setting-row"><div><div class="setting-label">Backup all sessions</div></div><div class="s-btn">📦 Backup</div></div>
+          <div class="setting-row"><div><div class="setting-label">Restore from backup</div></div><div class="s-btn">📥 Restore</div></div>
+          <div class="setting-row"><div><div class="setting-label">Clear all data</div><div class="setting-sub">Wipes sessions, allow list, settings</div></div><div class="s-btn" style="color:var(--rose);border-color:rgba(220,38,38,0.3)">🗑 Clear</div></div>
         </div>
-        <div class="tb-btn primary" style="width:100%;justify-content:center;display:flex;margin-top:12px;font-size:11px;padding:7px">💾 Save Settings</div>
-        <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--rule2);margin-top:10px">TagSentry v1.0.0</div>
+        <div class="tb-btn primary" style="width:100%;justify-content:center;display:flex;margin-bottom:10px;font-size:11px;padding:7px">💾 Save Settings</div>
+        <!-- Version reads from manifest at runtime — never stale -->
+        <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--rule2)">TagSentry <span class="js-version">v1.3.0</span> · MV3 Chrome Extension</div>
       </div>
     </div>
-
     <div class="annotation-col">
-      <div class="ann accent">
-        <div class="ann-num">A</div>
-        <div class="ann-body"><strong>Auto-start</strong> is recommended for SPAs and high-traffic pages where analytics tags fire before the user can manually click Record. Recording begins immediately on page load.</div>
-      </div>
-      <div class="ann amber">
-        <div class="ann-num">B</div>
-        <div class="ann-body"><strong>Known vendors only</strong> hides all requests that don't match any vendor pattern from the live feed. Useful for focused audits where you only care about recognized martech — cuts noise significantly.</div>
-      </div>
-      <div class="ann rose">
-        <div class="ann-num">C</div>
-        <div class="ann-body"><strong>Custom PII patterns</strong> opens a modal editor with a named list of patterns (name + regex + severity). Test input field validates the regex against sample values before saving.</div>
-      </div>
-      <div class="ann jade">
-        <div class="ann-num">D</div>
-        <div class="ann-body"><strong>Backup / Restore</strong> exports all sessions, settings, and whitelist as a single JSON file. Ideal for onboarding new team members or moving between machines. All data stays local — zero cloud sync.</div>
-      </div>
+      <div class="ann jade"><div class="ann-num">A</div><div class="ann-body"><strong>Version badge</strong> is injected at runtime from <code>chrome.runtime.getManifest().version</code> — it always shows the actual installed version regardless of what was hardcoded in HTML during a previous install.</div></div>
+      <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Appearance defaults</strong> are Light theme and Large (14px) font for new installs. Saved preferences override these on subsequent opens.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>PII pattern toggles</strong> take effect immediately on the live session — no reload needed. Disabling a pattern removes its chips from the tag list, its count from the badge, and its rows from the PII tab.</div></div>
+      <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Custom patterns</strong> open a modal editor. Each pattern has a name, regex, severity level, and a live test input that validates the regex against sample values before saving.</div></div>
+      <div class="ann jade"><div class="ann-num">E</div><div class="ann-body"><strong>Backup / Restore</strong> exports all sessions, settings, and allow list as a single JSON. Ideal for onboarding new team members or moving between machines. Zero cloud sync.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 08 of 08</div>
 </div>
 
-<!-- Footer -->
-<div style="padding:32px 60px;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between">
-  <div style="display:flex;align-items:center;gap:10px">
-    <div style="width:24px;height:24px;background:linear-gradient(135deg,var(--accent),#7c3aed);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:700;color:white">TS</div>
-    <span style="font-family:var(--serif);font-size:16px;font-weight:600">TagSentry</span>
-  </div>
-  <div style="font-family:var(--mono);font-size:10px;color:var(--fog)">Product Wireframes · v1.0 · 8 screens · Chrome Extension MV3</div>
-  <div style="font-family:var(--mono);font-size:10px;color:var(--fog)">Ready for implementation →</div>
-</div>
 
-<script src="scripts/main.js" defer></script>
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <div class="footer-logo">TS</div>
+    <span class="footer-name">TagSentry</span>
+  </div>
+  <div class="footer-copy">Product Wireframes · <span class="js-version">v1.3.0</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
+  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.3.0</span></button>
+</footer>
+
+<script src="wireframe.js"></script>
 </body>
 </html>
