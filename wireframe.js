@@ -1,7 +1,7 @@
 'use strict';
 
-const VERSION = 'v1.5.0';
-const DL_FILENAME = 'tagsentry-v1.5.0.zip';
+const VERSION = 'v1.5.2';
+const DL_FILENAME = 'tagsentry-v1.5.2.zip';
 
 // ── Version badge ──────────────────────────────────────────────
 document.querySelectorAll('.js-version').forEach(el => {
