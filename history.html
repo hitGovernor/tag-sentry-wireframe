@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TagSentry — Release History</title>
+<link rel="stylesheet" href="wireframe.css">
+<style>
+/* ── Release History page ──────────────────────────────────── */
+.history-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+}
+.history-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fog);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+.history-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--snow);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.history-title em { font-style: normal; color: var(--accent); }
+.history-sub {
+  font-size: 15px;
+  color: var(--fog);
+  max-width: 560px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+/* Release block */
+.release {
+  border-left: 3px solid var(--rule2);
+  padding: 0 0 40px 28px;
+  position: relative;
+}
+.release:last-child { border-left: 3px solid transparent; padding-bottom: 0; }
+.release::before {
+  content: '';
+  position: absolute;
+  left: -7px; top: 6px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--ink2);
+  border: 2px solid var(--rule2);
+}
+.release.current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+}
+
+.release-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.release-ver {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--snow);
+}
+.release.current .release-ver { color: var(--accent); }
+.release-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fog);
+}
+.release-current-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: rgba(99,102,241,0.15);
+  color: var(--accent);
+  border: 1px solid rgba(99,102,241,0.35);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+.release-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 600px) { .release-items { grid-template-columns: 1fr; } }
+
+.ri {
+  background: var(--ink2);
+  border: 1px solid var(--rule2);
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 9px;
+}
+.ri-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.ri.new  .ri-dot { background: var(--accent); }
+.ri.fix  .ri-dot { background: #34d399; }
+.ri.imp  .ri-dot { background: var(--amber); }
+.ri-title { font-size: 12px; font-weight: 600; color: var(--snow); margin-bottom: 3px; }
+.ri-body  { font-size: 11px; color: var(--fog); line-height: 1.5; }
+.ri-body code { font-family: var(--mono); font-size: 10px; background: var(--ink); padding: 1px 4px; border-radius: 2px; color: var(--mist); }
+
+.legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fog);
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+  margin-bottom: 32px;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.back-link:hover { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ───────────────────────────────────────────────────── -->
+<header class="top-bar">
+  <a class="bar-brand" href="index.html">
+    <div class="bar-logo">TS</div>
+    <span class="bar-name">Tag<span>Sentry</span></span>
+  </a>
+  <span class="bar-version js-version">v1.5.0</span>
+  <nav class="bar-spacer bar-nav" style="display:flex">
+    <a href="index.html#arch">Architecture</a>
+    <a href="index.html#live">Live</a>
+    <a href="index.html#detail">Detail</a>
+    <a href="index.html#sessions">Sessions</a>
+    <a href="index.html#diff">Diff</a>
+    <a href="index.html#pii">PII</a>
+    <a href="index.html#allowlist">Allow List</a>
+    <a href="index.html#export">Export</a>
+    <a href="index.html#settings">Settings</a>
+    <a href="history.html" style="color:var(--accent);font-weight:600">History</a>
+  </nav>
+  <button class="bar-dl js-download">⬇ Download Extension</button>
+</header>
+
+<!-- ── Content ───────────────────────────────────────────────── -->
+<div class="history-wrap">
+
+  <a class="back-link" href="index.html">← Wireframes</a>
+
+  <div class="history-eyebrow">Release History</div>
+  <h1 class="history-title">Tag<em>Sentry</em><br>Changelog</h1>
+  <p class="history-sub">Every release, every fix, every new feature — in one place. The extension targets Chrome MV3, with all data stored locally in <code style="font-family:var(--mono);font-size:12px;background:rgba(30,27,75,0.6);padding:1px 5px;border-radius:2px;color:#818cf8">chrome.storage.local</code>, zero cloud sync.</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>New feature</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>Bug fix</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Improvement</div>
+  </div>
+
+  <!-- ── v1.5.0 ─────────────────────────────────────────────── -->
+  <div class="release current">
+    <div class="release-header">
+      <span class="release-ver">v1.5.0</span>
+      <span class="release-current-badge">Current</span>
+      <span class="release-date">March 2026</span>
+    </div>
+    <div class="release-items">
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Console Error Monitor</div>
+          <div class="ri-body">Injected script captures <code>console.error</code>, <code>window.onerror</code>, and unhandled promise rejections from the page world. Background service worker stores errors keyed by hostname and tab. <strong>ERR ×N</strong> badge on affected rows. Full error detail, source location, and stack trace (collapsible) in the Console Errors section of the detail panel.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Permanent Exclusions</div>
+          <div class="ri-body">Right-click any row to <em>permanently exclude</em> a vendor or hostname (written to <code>chrome.storage.local</code>, applied at capture time in the service worker) or <em>hide this session</em> (RAM-only). Exclusions managed in a new section on the Allow List tab with one-click removal. Supersedes the old "Ignore all" session-only menu items.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Multi-Select &amp; Bulk Actions</div>
+          <div class="ri-body">☑ Select button enters select mode — checkboxes appear on each row. Bulk bar offers: <strong>Export selected</strong> (downloads JSON of checked entries), <strong>Hide others this session</strong> (adds unchosen hostnames to ignore list), <strong>Remove others</strong> (removes from session with confirmation). Escape exits select mode.</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Request Type Chips + Filter</div>
+          <div class="ri-body">Every row gets a type chip showing HTTP method + resource type (XHR, FETCH·POST, IMG, SCRIPT, etc.). A type dropdown filter in the toolbar narrows the live feed to a single type. Populated dynamically from the current session's unique labels.</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Path Disambiguation</div>
+          <div class="ri-body">When multiple requests share the same hostname, the shortest differentiating URL path suffix is computed at render time and shown beneath the host at 70% opacity. Highlighted by the live search term. No configuration needed — purely display-time heuristic.</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Expand All / Collapse All</div>
+          <div class="ri-body">⊞ Expand All / ⊟ Collapse All button in the Body section header bulk-toggles all nested JSON tree nodes at once. Hidden automatically when the body has no nested objects. State restored on re-render (e.g. when per-request search fires).</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Universal Search Highlight + Per-Request Search</div>
+          <div class="ri-body">Live feed search term is now carried into the detail panel, highlighting across params, body keys/values, JSON nodes, and raw URL. A separate 🔍 search input in the detail header overrides this per-request. First Escape clears per-request search; second Escape closes the panel.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Adobe Web SDK (alloy.js)</div>
+          <div class="ri-body">Adobe Experience Platform Edge Network requests (adobedc.net/ee/, etc.) now identified as vendor <code>adobe_websdk</code> in the Analytics category. XDM envelope flattened so individual event fields are scannable for PII without expanding nested JSON manually.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">PII Default Fix</div>
+          <div class="ri-body">Three-value sentinel replaced null/undefined ambiguity: <code>null</code> = never configured (all-on), <code>[]</code> = user explicitly turned all off, <code>[...ids]</code> = saved selection. Fresh installs correctly default to all-on without overwriting user preferences on existing installs.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Filter / Re-render Bug Fixes</div>
+          <div class="ri-body">Five bugs fixed: empty search clear, scroll-to-bottom jump on re-render, selected row highlight lost after re-render, stale detail panel when selected entry filtered out. <code>addTagRow(entry, isAppend)</code> flag guards auto-scroll.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.4.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.4.0</span>
+      <span class="release-date">February 2026</span>
+    </div>
+    <div class="release-items">
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">VENDOR_PARSERS Map</div>
+          <div class="ri-body">Structured vendor parser map replacing ad-hoc conditionals. Each vendor entry declares URL patterns, a parser function, and metadata. Custom vendor overrides and per-builtin edits applied at parse time.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Redirect Chip (onBeforeRedirect)</div>
+          <div class="ri-body"><code>onBeforeRedirect</code> listener captures 3xx redirect tracking pixels and impression beacons that never reach <code>onCompleted</code>. Redirect entries show a distinct chip in the live feed.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Session-Scoped Ignore List</div>
+          <div class="ri-body">Right-click any row to hide all requests from a vendor or hostname for the current session. Ignore bar above the list shows active rules with a Clear button. Superseded in v1.5 by the two-tier permanent/session exclusion model.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Allow List Eye Button Exclusions</div>
+          <div class="ri-body">Each vendor row in the Allow List tab gets a 👁 / 🙈 eye button to exclude that vendor from the live feed entirely — independent of the enabled/disabled toggle.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Vendor Edit / Override Modals</div>
+          <div class="ri-body">Custom vendors get an ✎ Edit button; built-in vendors get an ⓘ View/Edit button opening a read-only-by-default modal with an Override mode to modify URL patterns, name, or category without replacing the built-in entry.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Session Save → Immediate Tab Switch</div>
+          <div class="ri-body">After saving a session, the panel automatically switches to the Sessions tab so the saved entry is immediately visible. Previously required manual navigation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.3.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.3.0</span>
+      <span class="release-date">January 2026</span>
+    </div>
+    <div class="release-items">
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Default Light / Large Theme</div>
+          <div class="ri-body">New installs open with Light theme and Large (14px) font. Version badge reads live from <code>chrome.runtime.getManifest().version</code> — never stale. Migration guard prevents overwriting existing saved preferences.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Per-Tab Request Cache</div>
+          <div class="ri-body">Switching browser tabs no longer overwrites the request list. Each tab's session is cached separately in a <code>tabCache</code> Map and restored instantly on return. The active tab ID governs which session is displayed.</div>
+        </div>
+      </div>
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Allow List Enable / Disable All</div>
+          <div class="ri-body">One-click toggle to enable or disable all vendors at once. Button label and color update dynamically: green "Enable All" when anything is disabled; red "Disable All" when everything is on. Saves immediately.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">PII Respects Disabled Patterns</div>
+          <div class="ri-body">Turning off a PII pattern in Settings immediately removes its chips from tag rows, its count from the badge, and its rows from the PII tab — no panel reload required. Live re-evaluation on every settings change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.2.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.2.0</span>
+      <span class="release-date">December 2025</span>
+    </div>
+    <div class="release-items">
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">PII Tab Search &amp; Filter</div>
+          <div class="ri-body">Search findings by parameter name. Filter by severity (HIGH / MED / LOW). Jump directly from a PII chip on any tag row to that vendor's findings in the PII tab with a pre-set vendor filter banner.</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Custom PII Patterns</div>
+          <div class="ri-body">Add named regex patterns with severity levels and a live test field that validates the regex against sample values before saving. Industry-standard built-in patterns hardened to RFC 5322 (email), NANP (phone), and LUHN-aware (cards).</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Clear Button Fix</div>
+          <div class="ri-body">In-flight requests no longer re-populate the list after clicking Clear. A generation counter increments on each clear; background <code>NEW_REQUEST</code> messages carrying a stale generation are silently dropped.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.1.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.1.0</span>
+      <span class="release-date">November 2025</span>
+    </div>
+    <div class="release-items">
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Light / Dark Theme + Font Size</div>
+          <div class="ri-body">Full theme switcher (Light / Dark) and three font sizes (S / M / L) with preference persistence in <code>chrome.storage.local</code>. Applied immediately without reload.</div>
+        </div>
+      </div>
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Keyboard Navigation + Regex Search</div>
+          <div class="ri-body">↑↓ arrow keys navigate the tag list. / key focuses the search box. Regex mode toggle (<code>/Re</code>) activates regex matching; syntax errors are caught and displayed inline. Resizable detail panel and expandable inline JSON tree nodes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.0.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.0.0</span>
+      <span class="release-date">October 2025</span>
+    </div>
+    <div class="release-items">
+      <div class="ri new">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Initial Release</div>
+          <div class="ri-body">Chrome MV3 side-panel extension. Live request feed with vendor identification (50+ patterns), PII detection (email, phone, SSN, IP, cards), Allow List with per-vendor toggles, Session save/load, Baseline diff engine, and multi-format export (CSV / JSON / HTML / HAR).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /history-wrap -->
+
+<!-- ── Footer ────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <div class="footer-logo">TS</div>
+    <span class="footer-name">TagSentry</span>
+  </div>
+  <div class="footer-copy">Release History · <span class="js-version">v1.5.0</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
+  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.5.0</span></button>
+</footer>
+
+<script src="wireframe.js"></script>
+</body>
+</html>
