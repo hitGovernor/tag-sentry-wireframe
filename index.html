@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TagSentry — Product Wireframes v1.5</title>
+<title>TagSentry — Product Wireframes v1.5.2</title>
 <link rel="stylesheet" href="wireframe.css">
 </head>
 <body>
@@ -48,8 +48,8 @@
       <div class="cover-meta-item">9 Core Screens</div>
       <div class="cover-meta-item">80+ Vendor Patterns</div>
       <div class="cover-meta-item">PII Detection Engine</div>
-      <div class="cover-meta-item">Console Error Monitor</div>
       <div class="cover-meta-item">Permanent Exclusions</div>
+      <div class="cover-meta-item">Auto-Save Settings</div>
     </div>
   </div>
   <nav class="cover-index">
@@ -72,16 +72,16 @@
 <section class="changelog">
   <div class="changelog-title">▸ What's New — Release History &nbsp;<a href="history.html" style="font-size:10px;color:var(--accent);font-family:var(--mono);text-decoration:none;opacity:0.8">Full history →</a></div>
   <div class="changelog-grid">
-    <div class="cl-item new"><div class="cl-ver">v1.5.0 — Current</div><div class="cl-text"><strong>Console Error Monitor</strong> — Captures <code>console.error</code>, <code>window.onerror</code>, and unhandled promise rejections from the page. ERR badge on affected rows; errors shown in a collapsible detail section keyed to hostname.</div></div>
+    <div class="cl-item imp"><div class="cl-ver">v1.5.2 — Current</div><div class="cl-text"><strong>Auto-Save Settings</strong> — Every toggle and field change saves instantly with no Save button needed. PII pattern changes apply live to the feed, badges, and detail panel in the same action.</div></div>
+    <div class="cl-item fix"><div class="cl-ver">v1.5.2</div><div class="cl-text"><strong>Manual Permanent Exclusions</strong> — Add exclusions from the Allow List tab directly (Host or Vendor) without right-clicking a live request. Vendor picker shows all built-in and custom vendors sorted alphabetically.</div></div>
+    <div class="cl-item fix"><div class="cl-ver">v1.5.1</div><div class="cl-text"><strong>PII Chip Fully Respects Disabled Patterns</strong> — Disabling a pattern now removes chips, inline param highlights, and ⚠ PII badges from the detail panel immediately, including mid-session. Detail panel re-renders on save.</div></div>
     <div class="cl-item new"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Permanent Exclusions</strong> — Right-click any request to permanently hide that vendor or hostname across all sessions. Manage exclusions in a new section on the Allow List tab with one-click removal.</div></div>
     <div class="cl-item new"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Multi-Select &amp; Bulk Actions</strong> — Enter select mode to check multiple rows. Bulk export selected, hide all others for the session, or remove all others from the list.</div></div>
     <div class="cl-item imp"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Request Type Chips + Filter</strong> — Each row now shows a type chip (XHR, FETCH·POST, etc.). A dropdown filter lets you narrow the feed to a single request type.</div></div>
     <div class="cl-item imp"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Path Disambiguation</strong> — When multiple requests share the same hostname, the shortest disambiguating URL path suffix is shown beneath the host. Highlighted by the live search.</div></div>
     <div class="cl-item imp"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Expand All / Collapse All</strong> — Body section header now includes a button to expand or collapse all nested JSON objects at once. State is restored on re-render.</div></div>
     <div class="cl-item fix"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Universal Search Highlight + Per-Request Search</strong> — Live feed search term lights up in the detail panel. A secondary search in the detail header narrows to that request only; Escape clears it progressively.</div></div>
-    <div class="cl-item fix"><div class="cl-ver">v1.5.0</div><div class="cl-text"><strong>Adobe Web SDK Vendor</strong> — alloy.js / AEP Edge Network requests now identified, with XDM envelope flattening so individual event fields are scannable for PII.</div></div>
     <div class="cl-item new"><div class="cl-ver">v1.4.0</div><div class="cl-text"><strong>Vendor Patterns Library</strong> — VENDOR_PARSERS map, onBeforeRedirect listener for tracking pixels, ignore list (session-scoped, right-click), Allow List eye-button exclusions, vendor edit/override modals.</div></div>
-    <div class="cl-item new"><div class="cl-ver">v1.3.0</div><div class="cl-text"><strong>Default Light/Large</strong> — New installs open with Light theme and Large (14px) text. Per-tab request cache: switching browser tabs no longer overwrites the request list. One-click Enable/Disable All on Allow List.</div></div>
   </div>
 </section>
 
@@ -95,7 +95,7 @@
     <div class="page-meta">
       <div class="page-tag">Architecture Overview</div>
       <h2 class="page-title">How TagSentry Works</h2>
-      <p class="page-desc">The extension intercepts all network requests via Chrome's <code style="font-family:var(--mono);font-size:12px;background:var(--ink2);padding:1px 5px;border-radius:2px;color:#818cf8">webRequest</code> API and captures page-level console errors via an injected script — identifying vendors, parsing payloads, scanning for PII, and storing structured session data with zero page-side impact.</p>
+      <p class="page-desc">The extension intercepts all network requests via Chrome's <code style="font-family:var(--mono);font-size:12px;background:var(--bg2);padding:1px 5px;border-radius:2px;color:var(--accent)">webRequest</code> API — identifying vendors, parsing payloads, scanning for PII, and storing structured session data with zero page-side impact.</p>
     </div>
   </div>
   <div class="section-rule"></div>
@@ -123,8 +123,8 @@
     <div class="feat-card"><div class="feat-icon">🔒</div><div class="feat-title">PII Detection</div><div class="feat-body">Configurable scanning across all params and request bodies. Industry-standard patterns for email (RFC 5322), phone (NANP), SSN, IP, credit cards, and DOB. Custom regex patterns with severity scoring.</div></div>
     <div class="feat-card"><div class="feat-icon">📐</div><div class="feat-title">Baseline Diff Engine</div><div class="feat-body">Save any session as a named baseline. Future sessions diff against it — surfacing added tags, removed tags, and changed parameter values with color-coded severity.</div></div>
     <div class="feat-card"><div class="feat-icon">📤</div><div class="feat-title">Multi-Format Export</div><div class="feat-body">Export as CSV, JSON, HTML audit report, or HAR. Multi-select rows for bulk export of a specific subset. PII redaction available on all formats.</div></div>
-    <div class="feat-card"><div class="feat-icon">🚨</div><div class="feat-title">Console Error Monitor</div><div class="feat-body">Captures <code style="font-size:10px;font-family:var(--mono)">console.error</code>, <code style="font-size:10px;font-family:var(--mono)">window.onerror</code>, and unhandled promise rejections via injected script. ERR badge on affected rows; full error detail + stack trace in the detail panel.</div></div>
-    <div class="feat-card"><div class="feat-icon">🚫</div><div class="feat-title">Permanent Exclusions</div><div class="feat-body">Right-click any request to permanently exclude a vendor or hostname. Exclusions persist across sessions and take effect at request-capture time in the background service worker. Managed from the Allow List tab.</div></div>
+    <div class="feat-card"><div class="feat-icon">⚙️</div><div class="feat-title">Auto-Save Settings</div><div class="feat-body">Every setting change — PII toggles, recording behavior, max sessions — saves immediately. No Save button required. Changes apply to the live feed in real time; disabled PII patterns vanish from chips, badges, and the PII tab instantly.</div></div>
+    <div class="feat-card"><div class="feat-icon">🚫</div><div class="feat-title">Permanent Exclusions</div><div class="feat-body">Right-click any request to permanently exclude a vendor or hostname, or add exclusions manually via the Allow List tab. Exclusions persist across sessions and take effect at request-capture time. Host and vendor exclusions managed in one place.</div></div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 00 of 08</div>
 </div>
@@ -188,7 +188,7 @@
             <div class="ic-btn on">🏷️</div>
             <div class="ic-btn">🔒</div>
             <div class="ic-btn">⚠️</div>
-            <select style="font-size:9px;background:var(--ink);color:var(--mist);border:1px solid var(--rule2);border-radius:3px;padding:2px 4px;font-family:var(--mono)"><option>All types</option><option>XHR</option><option>FETCH·POST</option></select>
+            <select style="font-size:9px;background:var(--bg);color:var(--mist);border:1px solid var(--rule2);border-radius:3px;padding:2px 4px;font-family:var(--mono)"><option>All types</option><option>XHR</option><option>FETCH·POST</option></select>
           </div>
           <div class="tag-list scroll-clip">
             <div class="tag-row ok sel">
@@ -205,7 +205,7 @@
               <div class="tag-info">
                 <div class="tag-name">Meta Pixel — Purchase</div>
                 <div class="tag-host">facebook.com <span style="opacity:0.55;font-size:9px">/tr/</span></div>
-                <div class="tag-chips"><span class="chip c-blue">Advertising</span><span class="chip c-red" style="cursor:pointer" title="Click to view findings in PII tab">PII</span><span class="chip c-red" style="font-size:8px;font-weight:600">ERR ×2</span><span class="chip c-green">200</span></div>
+                <div class="tag-chips"><span class="chip c-blue">Advertising</span><span class="chip c-red" style="cursor:pointer" title="Click to view findings in PII tab">PII</span><span class="chip c-green">200</span></div>
               </div>
               <div class="tag-aside"><div class="tag-time">12:04:01</div><div class="dot d-r"></div></div>
             </div>
@@ -240,14 +240,14 @@
         </div>
       </div>
       <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-        <span style="font-family:var(--mono);font-size:9px;color:var(--fog);background:var(--ink2);border:1px solid var(--rule);padding:3px 8px;border-radius:2px">Side panel · 400px wide</span>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--fog);background:var(--bg3);border:1px solid var(--rule);padding:3px 8px;border-radius:2px">Side panel · 400px wide</span>
         <span style="font-family:var(--mono);font-size:9px;color:var(--accent);background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.25);padding:3px 8px;border-radius:2px">↑↓ keyboard navigation · / to focus search</span>
       </div>
     </div>
     <div class="annotation-col">
       <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Request type chips + filter</strong> — each row shows a type chip (XHR, FETCH·POST, IMG, SCRIPT…). The type dropdown filter narrows the live feed to a single request type instantly.</div></div>
       <div class="ann rose"><div class="ann-num">B</div><div class="ann-body"><strong>Path disambiguation</strong> — when multiple requests share the same hostname, the shortest disambiguating URL path suffix is shown at 70% opacity. The live search term highlights it too.</div></div>
-      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>ERR badge</strong> — a red chip on any row whose hostname logged a console error, JS exception, or unhandled rejection. Count shown when more than one. Open the request to see full details and stack traces.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>PII chip</strong> — shown when any enabled pattern fires on this request's params or body. Clicking navigates to the PII tab with a vendor filter pre-set. Disabled patterns contribute no chips — changes apply immediately without reload.</div></div>
       <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Multi-select (☑ Select)</strong> — enters select mode; checkboxes appear on all rows. Bulk bar offers: Export selected, Hide others this session, or Remove others from list.</div></div>
       <div class="ann jade"><div class="ann-num">E</div><div class="ann-body"><strong>Two-tier right-click menu:</strong> 🚫 <em>Permanently exclude</em> (written to storage, applies at capture time across all sessions) and ⏸ <em>Hide this session</em> (RAM-only, cleared with Clear button).</div></div>
     </div>
@@ -265,7 +265,7 @@
     <div class="page-meta">
       <div class="page-tag">Inline Component</div>
       <h2 class="page-title">Tag Detail Panel <span class="new-badge">Updated</span></h2>
-      <p class="page-desc">Expands below the selected row. Shows stacked sections: Query Params, Body (with Expand All / Collapse All for nested JSON), Raw URL, and Console Errors. A per-request search input in the header narrows to that request only. PII values flagged inline.</p>
+      <p class="page-desc">Expands below the selected row. Shows stacked sections: Query Params, Body (with Expand All / Collapse All for nested JSON), and Raw URL. A per-request search input in the header narrows to that request only. PII values are flagged inline; disabled patterns show nothing.</p>
     </div>
   </div>
   <div class="section-rule"></div>
@@ -287,16 +287,16 @@
           <div class="tag-aside"><div class="tag-time">12:04:01</div><div class="dot d-g"></div></div>
         </div>
         <div class="detail-panel">
-          <div class="detail-head" style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--ink2);border-bottom:1px solid var(--rule2)">
+          <div class="detail-head" style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--bg3);border-bottom:1px solid var(--rule2)">
             <div class="vi vi-g" style="flex-shrink:0;width:18px;height:18px;font-size:8px">G</div>
             <div style="font-size:10px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Google Analytics 4 — page_view</div>
             <!-- Per-request search — NEW in v1.5 -->
-            <input style="width:90px;background:var(--ink);border:1px solid var(--rule2);border-radius:3px;padding:2px 6px;font-family:var(--mono);font-size:9px;color:var(--mist)" placeholder="🔍 search…">
+            <input style="width:90px;background:var(--bg);border:1px solid var(--rule2);border-radius:3px;padding:2px 6px;font-family:var(--mono);font-size:9px;color:var(--mist)" placeholder="🔍 search…">
             <div style="font-family:var(--mono);font-size:9px;color:var(--fog)">⤢</div>
           </div>
           <div class="resize-hint"></div>
           <!-- Body section with Expand All button — NEW in v1.5 -->
-          <div style="display:flex;align-items:center;padding:4px 8px;background:var(--ink2);border-bottom:1px solid var(--rule2)">
+          <div style="display:flex;align-items:center;padding:4px 8px;background:var(--bg3);border-bottom:1px solid var(--rule2)">
             <span style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.07em;color:var(--fog);flex:1">Body</span>
             <span style="font-family:var(--mono);font-size:8px;color:var(--rule2);margin-right:8px">6 params</span>
             <span style="font-family:var(--mono);font-size:8px;border:1px solid var(--rule2);border-radius:2px;padding:1px 5px;color:var(--fog);cursor:pointer">⊞ Expand All</span>
@@ -317,20 +317,6 @@
               <div class="kv-v pii">user@example.com<span class="pii-tag">⚠ EMAIL</span></div>
             </div>
           </div>
-          <!-- Console Errors section — NEW in v1.5 -->
-          <div style="display:flex;align-items:center;padding:4px 8px;background:var(--ink2);border-top:1px solid var(--rule2);border-bottom:1px solid var(--rule2)">
-            <span style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.07em;color:var(--fog);flex:1">Console Errors</span>
-            <span style="font-family:var(--mono);font-size:8px;background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:2px;padding:1px 5px">2 errors</span>
-            <span style="font-size:8px;color:var(--rule2);margin-left:8px">▶</span>
-          </div>
-          <div style="padding:6px 10px;border-bottom:1px solid var(--rule2)">
-            <div style="display:flex;gap:5px;margin-bottom:3px;align-items:center">
-              <span style="background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:2px;font-family:var(--mono);font-size:8px;padding:1px 5px">console.error</span>
-              <span style="font-family:var(--mono);font-size:8px;color:var(--fog)">12:04:01</span>
-              <span style="font-family:var(--mono);font-size:8px;color:var(--fog);margin-left:auto">pixel.js · line 42</span>
-            </div>
-            <div style="font-family:var(--mono);font-size:9px;color:var(--mist)">Uncaught TypeError: Cannot read properties of undefined (reading 'push')</div>
-          </div>
         </div>
         <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--fog);font-style:italic">↑ Drag resize handle · ⤢ to expand fullscreen · Escape clears per-request search</div>
       </div>
@@ -338,8 +324,7 @@
     <div class="annotation-col">
       <div class="ann accent"><div class="ann-num">A</div><div class="ann-body"><strong>Per-request search</strong> — a search input in the detail header narrows highlighting to this request only. First Escape clears it; second Escape closes the detail panel. The live feed's search term is used as a fallback when no per-request search is active.</div></div>
       <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Expand All / Collapse All</strong> button in the Body section header bulk-toggles all nested JSON tree nodes. State is remembered across re-renders. Hidden when the body has no nested objects.</div></div>
-      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>Console Errors section</strong> appears only when errors from this hostname have been captured. Shows source (console.error / JS Error / Unhandled Promise), timestamp, file + line, message, and a collapsible stack trace.</div></div>
-      <div class="ann rose"><div class="ann-num">D</div><div class="ann-body"><strong>PII values</strong> highlighted inline with pattern type badge (EMAIL, PHONE, SSN…). The search term from either the live feed or per-request search also highlights within PII values.</div></div>
+      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>PII values</strong> highlighted inline with pattern type badge (EMAIL, PHONE, SSN…). Only findings from enabled detection patterns are shown — disabling a pattern removes its highlighting immediately. The search term from either input also highlights within PII values.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 02 of 08</div>
@@ -453,12 +438,12 @@
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
           <div style="flex:1">
             <span class="small-label">Session A (baseline)</span>
-            <div style="background:var(--ink);border:1px solid rgba(79,70,229,0.35);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:10px;color:var(--accent)">📌 Production Baseline</div>
+            <div style="background:var(--bg);border:1px solid rgba(79,70,229,0.35);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:10px;color:var(--accent)">📌 Production Baseline</div>
           </div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--fog);flex-shrink:0;margin-top:16px">vs</div>
           <div style="flex:1">
             <span class="small-label">Session B</span>
-            <div style="background:var(--ink);border:1px solid var(--rule2);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:10px;color:var(--mist)">Staging · Sprint 42 ▾</div>
+            <div style="background:var(--bg);border:1px solid var(--rule2);border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:10px;color:var(--mist)">Staging · Sprint 42 ▾</div>
           </div>
         </div>
         <div style="display:flex;gap:5px;margin-bottom:9px;align-items:center;flex-wrap:wrap">
@@ -625,15 +610,18 @@
           <div class="tb-btn">📥 Import JSON</div>
           <div class="tb-btn">📤 Export JSON</div>
         </div>
-        <!-- Permanent Exclusions section — NEW in v1.5 -->
+        <!-- Permanent Exclusions section — updated in v1.5.1 -->
         <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--rule2)">
-          <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.07em;color:var(--fog);margin-bottom:6px">Permanent Exclusions</div>
-          <div style="background:var(--ink);border:1px solid var(--rule2);border-left:3px solid rgba(239,68,68,0.5);border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px;margin-bottom:3px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+            <span style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:0.07em;color:var(--fog);flex:1">Permanent Exclusions</span>
+            <div class="tb-btn primary" style="padding:2px 7px;font-size:8px">+ Add</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--rule2);border-left:3px solid rgba(239,68,68,0.5);border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px;margin-bottom:3px">
             <span style="background:rgba(107,114,128,0.15);color:var(--fog);border:1px solid var(--rule);border-radius:2px;font-family:var(--mono);font-size:8px;padding:1px 5px">Host</span>
             <span style="font-family:var(--mono);font-size:9px;color:var(--mist);flex:1">ad-tracker.example.com</span>
             <div class="s-btn" style="font-size:8px;color:var(--rose);border-color:rgba(220,38,38,0.3);padding:1px 5px">✕ Remove</div>
           </div>
-          <div style="background:var(--ink);border:1px solid var(--rule2);border-left:3px solid rgba(239,68,68,0.5);border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px">
+          <div style="background:var(--bg);border:1px solid var(--rule2);border-left:3px solid rgba(239,68,68,0.5);border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px">
             <span style="background:rgba(99,102,241,0.1);color:var(--accent);border:1px solid rgba(99,102,241,0.25);border-radius:2px;font-family:var(--mono);font-size:8px;padding:1px 5px">Vendor</span>
             <span style="font-family:var(--mono);font-size:9px;color:var(--mist);flex:1">LinkedIn Insight Tag</span>
             <div class="s-btn" style="font-size:8px;color:var(--rose);border-color:rgba(220,38,38,0.3);padding:1px 5px">✕ Remove</div>
@@ -688,7 +676,7 @@
           <div class="ex-card"><div class="ex-icon">🔧</div><div class="ex-name">HAR</div><div class="ex-desc">DevTools compatible</div></div>
         </div>
         <span class="small-label">Options</span>
-        <div style="background:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:2px 10px;margin-bottom:12px">
+        <div style="background:var(--bg);border:1px solid var(--rule);border-radius:5px;padding:2px 10px;margin-bottom:12px">
           <div class="setting-row"><div><div class="setting-label">Include raw payloads</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">Redact PII values</div><div class="setting-sub">Replaces PII with [REDACTED]</div></div><div class="toggle-track on"></div></div>
           <div class="setting-row"><div><div class="setting-label">Include diff vs baseline</div></div><div class="toggle-track off"></div></div>
@@ -717,7 +705,7 @@
     <div class="page-meta">
       <div class="page-tag">Configuration</div>
       <h2 class="page-title">Settings <span class="new-badge">Updated</span></h2>
-      <p class="page-desc">Global preferences: recording behavior, appearance (theme + font size), PII detection toggles, custom patterns, session storage, and data management. The version badge reads live from the installed manifest.</p>
+      <p class="page-desc">Global preferences: recording behavior, appearance (theme + font size), PII detection toggles, custom patterns, session storage, and data management. All changes save automatically the moment you interact with a control — no Save button required.</p>
     </div>
   </div>
   <div class="section-rule"></div>
@@ -774,17 +762,18 @@
           <div class="setting-row"><div><div class="setting-label">Restore from backup</div></div><div class="s-btn">📥 Restore</div></div>
           <div class="setting-row"><div><div class="setting-label">Clear all data</div><div class="setting-sub">Wipes sessions, allow list, settings</div></div><div class="s-btn" style="color:var(--rose);border-color:rgba(220,38,38,0.3)">🗑 Clear</div></div>
         </div>
-        <div class="tb-btn primary" style="width:100%;justify-content:center;display:flex;margin-bottom:10px;font-size:11px;padding:7px">💾 Save Settings</div>
+        <div style="margin-bottom:10px;padding:6px 10px;background:var(--jade-lt);border:1px solid rgba(5,122,85,0.2);border-radius:4px;font-family:var(--mono);font-size:9px;color:var(--jade)">✓ Changes save automatically — no Save button needed</div>
         <!-- Version reads from manifest at runtime — never stale -->
-        <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--rule2)">TagSentry <span class="js-version">v1.5.0</span> · MV3 Chrome Extension</div>
+        <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--fog)">TagSentry <span class="js-version">v1.5.2</span> · MV3 Chrome Extension</div>
       </div>
     </div>
     <div class="annotation-col">
       <div class="ann jade"><div class="ann-num">A</div><div class="ann-body"><strong>Version badge</strong> is injected at runtime from <code>chrome.runtime.getManifest().version</code> — it always shows the actual installed version regardless of what was hardcoded in HTML during a previous install.</div></div>
       <div class="ann accent"><div class="ann-num">B</div><div class="ann-body"><strong>Appearance defaults</strong> are Light theme and Large (14px) font for new installs. Saved preferences override these on subsequent opens.</div></div>
-      <div class="ann rose"><div class="ann-num">C</div><div class="ann-body"><strong>PII pattern toggles</strong> take effect immediately on the live session — no reload needed. Disabling a pattern removes its chips from the tag list, its count from the badge, and its rows from the PII tab.</div></div>
-      <div class="ann amber"><div class="ann-num">D</div><div class="ann-body"><strong>Custom patterns</strong> open a modal editor. Each pattern has a name, regex, severity level, and a live test input that validates the regex against sample values before saving.</div></div>
-      <div class="ann jade"><div class="ann-num">E</div><div class="ann-body"><strong>Backup / Restore</strong> exports all sessions, settings, and allow list as a single JSON. Ideal for onboarding new team members or moving between machines. Zero cloud sync.</div></div>
+      <div class="ann jade"><div class="ann-num">C</div><div class="ann-body"><strong>Auto-save on change</strong> — every toggle and number field saves the moment you interact. Toggles save immediately on flip; the max sessions number waits 600ms after you stop typing. No Save button needed — but one is still available for explicit confirmation.</div></div>
+      <div class="ann rose"><div class="ann-num">D</div><div class="ann-body"><strong>PII pattern toggles</strong> take effect live — no reload needed. Disabling a pattern removes its chips from tag rows, its count from the badge, and its rows from the PII tab. The open detail panel also re-renders immediately.</div></div>
+      <div class="ann amber"><div class="ann-num">E</div><div class="ann-body"><strong>Custom patterns</strong> open a modal editor. Each pattern has a name, regex, severity level, and a live test input that validates the regex against sample values before saving.</div></div>
+      <div class="ann jade"><div class="ann-num">F</div><div class="ann-body"><strong>Backup / Restore</strong> exports all sessions, settings, and allow list as a single JSON. Ideal for onboarding new team members or moving between machines. Zero cloud sync.</div></div>
     </div>
   </div>
   <div class="page-stamp">TagSentry Wireframes · 08 of 08</div>
@@ -799,8 +788,8 @@
     <div class="footer-logo">TS</div>
     <span class="footer-name">TagSentry</span>
   </div>
-  <div class="footer-copy">Product Wireframes · <span class="js-version">v1.5.0</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
-  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.5.0</span></button>
+  <div class="footer-copy">Product Wireframes · <span class="js-version">v1.5.2</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
+  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.5.2</span></button>
 </footer>
 
 <script src="wireframe.js"></script>

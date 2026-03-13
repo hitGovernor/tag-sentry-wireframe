@@ -23,9 +23,10 @@
 .history-title {
   font-size: 36px;
   font-weight: 800;
-  color: var(--snow);
+  color: var(--ink);
   line-height: 1.1;
   margin-bottom: 12px;
+  font-family: var(--serif);
 }
 .history-title em { font-style: normal; color: var(--accent); }
 .history-sub {
@@ -49,13 +50,13 @@
   left: -7px; top: 6px;
   width: 11px; height: 11px;
   border-radius: 50%;
-  background: var(--ink2);
+  background: var(--bg);
   border: 2px solid var(--rule2);
 }
 .release.current::before {
   background: var(--accent);
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
 }
 
 .release-header {
@@ -69,20 +70,15 @@
   font-family: var(--mono);
   font-size: 20px;
   font-weight: 700;
-  color: var(--snow);
+  color: var(--ink);
 }
 .release.current .release-ver { color: var(--accent); }
-.release-date {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--fog);
-}
 .release-current-badge {
   font-family: var(--mono);
   font-size: 10px;
-  background: rgba(99,102,241,0.15);
+  background: var(--accent-lt);
   color: var(--accent);
-  border: 1px solid rgba(99,102,241,0.35);
+  border: 1px solid rgba(79,70,229,0.3);
   border-radius: 3px;
   padding: 2px 8px;
 }
@@ -95,8 +91,8 @@
 @media (max-width: 600px) { .release-items { grid-template-columns: 1fr; } }
 
 .ri {
-  background: var(--ink2);
-  border: 1px solid var(--rule2);
+  background: var(--bg);
+  border: 1px solid var(--rule);
   border-radius: 6px;
   padding: 10px 12px;
   display: flex;
@@ -109,11 +105,11 @@
   margin-top: 5px;
 }
 .ri.new  .ri-dot { background: var(--accent); }
-.ri.fix  .ri-dot { background: #34d399; }
+.ri.fix  .ri-dot { background: var(--jade); }
 .ri.imp  .ri-dot { background: var(--amber); }
-.ri-title { font-size: 12px; font-weight: 600; color: var(--snow); margin-bottom: 3px; }
+.ri-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .ri-body  { font-size: 11px; color: var(--fog); line-height: 1.5; }
-.ri-body code { font-family: var(--mono); font-size: 10px; background: var(--ink); padding: 1px 4px; border-radius: 2px; color: var(--mist); }
+.ri-body code { font-family: var(--mono); font-size: 10px; background: var(--bg3); padding: 1px 4px; border-radius: 2px; color: var(--accent); }
 
 .legend {
   display: flex;
@@ -154,7 +150,7 @@
     <div class="bar-logo">TS</div>
     <span class="bar-name">Tag<span>Sentry</span></span>
   </a>
-  <span class="bar-version js-version">v1.5.0</span>
+  <span class="bar-version js-version">v1.5.2</span>
   <nav class="bar-spacer bar-nav" style="display:flex">
     <a href="index.html#arch">Architecture</a>
     <a href="index.html#live">Live</a>
@@ -177,69 +173,107 @@
 
   <div class="history-eyebrow">Release History</div>
   <h1 class="history-title">Tag<em>Sentry</em><br>Changelog</h1>
-  <p class="history-sub">Every release, every fix, every new feature — in one place. The extension targets Chrome MV3, with all data stored locally in <code style="font-family:var(--mono);font-size:12px;background:rgba(30,27,75,0.6);padding:1px 5px;border-radius:2px;color:#818cf8">chrome.storage.local</code>, zero cloud sync.</p>
+  <p class="history-sub">Every release, every fix, every new feature — in one place. The extension targets Chrome MV3, with all data stored locally in <code>chrome.storage.local</code>, zero cloud sync.</p>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>New feature</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div>Bug fix</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--jade)"></div>Bug fix</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Improvement</div>
   </div>
 
-  <!-- ── v1.5.0 ─────────────────────────────────────────────── -->
+  <!-- ── v1.5.2 ─────────────────────────────────────────────── -->
   <div class="release current">
     <div class="release-header">
-      <span class="release-ver">v1.5.0</span>
+      <span class="release-ver">v1.5.2</span>
       <span class="release-current-badge">Current</span>
-      <span class="release-date">March 2026</span>
+    </div>
+    <div class="release-items">
+      <div class="ri imp">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Auto-Save Settings</div>
+          <div class="ri-body">All settings controls now save the moment you interact — toggles fire on <code>change</code>, the max sessions number waits 600ms after the last keystroke. No Save button required. A <code>silent</code> flag suppresses the toast on auto-save while preserving it for the explicit Save button.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Manual Permanent Exclusions</div>
+          <div class="ri-body">A <strong>+ Add</strong> button in the Permanent Exclusions header opens a modal where you can exclude by Host (free-text hostname, protocol/path stripped automatically) or Vendor (alphabetically sorted picker of all built-in and custom vendors).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.5.1 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.5.1</span>
+    </div>
+    <div class="release-items">
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">Console Error Monitor Removed</div>
+          <div class="ri-body">Backed out entirely: <code>console.error</code> / <code>window.onerror</code> / <code>unhandledrejection</code> hooks removed from <code>injected.js</code>; relay removed from <code>content.js</code>; <code>pageErrors</code> Map and all handlers removed from <code>background.js</code> and <code>panel.js</code>.</div>
+        </div>
+      </div>
+      <div class="ri fix">
+        <div class="ri-dot"></div>
+        <div>
+          <div class="ri-title">PII Chip Fully Respects Disabled Patterns</div>
+          <div class="ri-body">Detail panel sections now receive <code>getVisiblePIIFindings(entry)</code> instead of raw <code>entry.piiFindings</code>. Inline param highlights and ⚠ PII badges in Query Params and Body both respect which patterns are enabled. <code>saveSettings()</code> triggers a full re-render of the live feed and open detail panel.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── v1.5.0 ─────────────────────────────────────────────── -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-ver">v1.5.0</span>
     </div>
     <div class="release-items">
       <div class="ri new">
         <div class="ri-dot"></div>
         <div>
-          <div class="ri-title">Console Error Monitor</div>
-          <div class="ri-body">Injected script captures <code>console.error</code>, <code>window.onerror</code>, and unhandled promise rejections from the page world. Background service worker stores errors keyed by hostname and tab. <strong>ERR ×N</strong> badge on affected rows. Full error detail, source location, and stack trace (collapsible) in the Console Errors section of the detail panel.</div>
-        </div>
-      </div>
-      <div class="ri new">
-        <div class="ri-dot"></div>
-        <div>
           <div class="ri-title">Permanent Exclusions</div>
-          <div class="ri-body">Right-click any row to <em>permanently exclude</em> a vendor or hostname (written to <code>chrome.storage.local</code>, applied at capture time in the service worker) or <em>hide this session</em> (RAM-only). Exclusions managed in a new section on the Allow List tab with one-click removal. Supersedes the old "Ignore all" session-only menu items.</div>
+          <div class="ri-body">Right-click any request to permanently exclude a vendor or hostname across all sessions. Stored in <code>chrome.storage.local</code> alongside the whitelist; applied at capture time in the background service worker so excluded entries never reach the live feed.</div>
         </div>
       </div>
       <div class="ri new">
         <div class="ri-dot"></div>
         <div>
           <div class="ri-title">Multi-Select &amp; Bulk Actions</div>
-          <div class="ri-body">☑ Select button enters select mode — checkboxes appear on each row. Bulk bar offers: <strong>Export selected</strong> (downloads JSON of checked entries), <strong>Hide others this session</strong> (adds unchosen hostnames to ignore list), <strong>Remove others</strong> (removes from session with confirmation). Escape exits select mode.</div>
+          <div class="ri-body">☑ Select mode adds checkboxes to all rows. A bulk action bar offers: Export selected, Hide others this session, or Remove others from the list. Multi-select state is tracked in <code>state.multiSelect.selected</code> (a <code>Set</code> of entry IDs).</div>
         </div>
       </div>
       <div class="ri imp">
         <div class="ri-dot"></div>
         <div>
           <div class="ri-title">Request Type Chips + Filter</div>
-          <div class="ri-body">Every row gets a type chip showing HTTP method + resource type (XHR, FETCH·POST, IMG, SCRIPT, etc.). A type dropdown filter in the toolbar narrows the live feed to a single type. Populated dynamically from the current session's unique labels.</div>
+          <div class="ri-body">Each row shows a type chip (XHR, FETCH·POST, IMG, SCRIPT…) derived from <code>getRequestLabel()</code>. A dropdown in the filter toolbar narrows the live feed to a single request type. Type filter clears with Clear.</div>
         </div>
       </div>
       <div class="ri imp">
         <div class="ri-dot"></div>
         <div>
           <div class="ri-title">Path Disambiguation</div>
-          <div class="ri-body">When multiple requests share the same hostname, the shortest differentiating URL path suffix is computed at render time and shown beneath the host at 70% opacity. Highlighted by the live search term. No configuration needed — purely display-time heuristic.</div>
+          <div class="ri-body">When multiple requests share the same hostname, <code>getDisambigPath()</code> returns the shortest 1–2 segment suffix that uniquely identifies the URL within the group. Shown at 70% opacity beneath the host; highlighted by the search term.</div>
         </div>
       </div>
       <div class="ri imp">
         <div class="ri-dot"></div>
         <div>
           <div class="ri-title">Expand All / Collapse All</div>
-          <div class="ri-body">⊞ Expand All / ⊟ Collapse All button in the Body section header bulk-toggles all nested JSON tree nodes at once. Hidden automatically when the body has no nested objects. State restored on re-render (e.g. when per-request search fires).</div>
+          <div class="ri-body">A button in the Body section header bulk-toggles all nested JSON tree nodes. State is persisted in <code>state[sec.id + '_allExpanded']</code> and restored across re-renders. Hidden when the body has no nested objects.</div>
         </div>
       </div>
-      <div class="ri imp">
+      <div class="ri fix">
         <div class="ri-dot"></div>
         <div>
           <div class="ri-title">Universal Search Highlight + Per-Request Search</div>
-          <div class="ri-body">Live feed search term is now carried into the detail panel, highlighting across params, body keys/values, JSON nodes, and raw URL. A separate 🔍 search input in the detail header overrides this per-request. First Escape clears per-request search; second Escape closes the panel.</div>
+          <div class="ri-body">Live feed search term highlights in the detail panel. A secondary search input in the detail header (<code>state.detailSearch</code>) narrows highlighting to that request only. First Escape clears per-request search; second closes the detail panel.</div>
         </div>
       </div>
       <div class="ri new">
@@ -270,7 +304,6 @@
   <div class="release">
     <div class="release-header">
       <span class="release-ver">v1.4.0</span>
-      <span class="release-date">February 2026</span>
     </div>
     <div class="release-items">
       <div class="ri new">
@@ -322,7 +355,6 @@
   <div class="release">
     <div class="release-header">
       <span class="release-ver">v1.3.0</span>
-      <span class="release-date">January 2026</span>
     </div>
     <div class="release-items">
       <div class="ri new">
@@ -360,7 +392,6 @@
   <div class="release">
     <div class="release-header">
       <span class="release-ver">v1.2.0</span>
-      <span class="release-date">December 2025</span>
     </div>
     <div class="release-items">
       <div class="ri imp">
@@ -391,7 +422,6 @@
   <div class="release">
     <div class="release-header">
       <span class="release-ver">v1.1.0</span>
-      <span class="release-date">November 2025</span>
     </div>
     <div class="release-items">
       <div class="ri imp">
@@ -415,7 +445,6 @@
   <div class="release">
     <div class="release-header">
       <span class="release-ver">v1.0.0</span>
-      <span class="release-date">October 2025</span>
     </div>
     <div class="release-items">
       <div class="ri new">
@@ -436,8 +465,8 @@
     <div class="footer-logo">TS</div>
     <span class="footer-name">TagSentry</span>
   </div>
-  <div class="footer-copy">Release History · <span class="js-version">v1.5.0</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
-  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.5.0</span></button>
+  <div class="footer-copy">Release History · <span class="js-version">v1.5.2</span> · MV3 Chrome Extension · All data local, zero cloud sync</div>
+  <button class="bar-dl js-download">⬇ Download <span class="js-version">v1.5.2</span></button>
 </footer>
 
 <script src="wireframe.js"></script>
