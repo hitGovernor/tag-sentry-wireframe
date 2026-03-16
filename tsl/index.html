@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TagSentry Lite — Chrome Extension</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #ffffff;
+  --bg2:       #f7f7fb;
+  --bg3:       #eeeef6;
+  --bg4:       #e4e3f0;
+  --rule:      #dddcec;
+  --rule2:     #c9c8dc;
+  --ink:       #1a1833;
+  --ink2:      #2e2c4e;
+  --fog:       #6b6988;
+  --mist:      #4a4870;
+  --accent:    #4f46e5;
+  --accent-lt: #eeeeff;
+  --jade:      #057a55;
+  --jade-lt:   #edfaf3;
+  --mono: 'IBM Plex Mono', monospace;
+  --serif: 'Fraunces', serif;
+  --body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg2);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* NAV */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.93); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 48px; height: 48px;
+  display: flex; align-items: center; gap: 16px;
+}
+.bar-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
+.bar-logo {
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; font-weight: 700; color: white;
+}
+.bar-name { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); }
+.bar-name span { color: #059669; }
+.bar-badge { font-family: var(--mono); font-size: 9px; color: #057a55; background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.3); border-radius: 2px; padding: 2px 7px; }
+.bar-spacer { flex: 1; }
+.bar-link { font-family: var(--mono); font-size: 10px; color: var(--fog); text-decoration: none; transition: color 0.15s; }
+.bar-link:hover { color: var(--accent); }
+.bar-dl {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  background: #059669; color: white; border: none; border-radius: 4px;
+  padding: 6px 14px; cursor: pointer; text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s; flex-shrink: 0;
+}
+.bar-dl:hover { opacity: 0.88; transform: translateY(-1px); }
+.bar-dl:active { transform: translateY(0); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: grid; place-items: center;
+  padding: 120px 60px 80px; position: relative; overflow: hidden;
+  background: var(--bg); border-bottom: 1px solid var(--rule);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 48px 48px; opacity: 0.6;
+}
+.hero-glow {
+  position: absolute; width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(5,150,105,0.06) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 780px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: #057a55; border: 1px solid rgba(5,122,85,0.3); background: var(--jade-lt);
+  border-radius: 2px; padding: 5px 12px; margin-bottom: 36px;
+}
+.hero-eyebrow::before { content: '▸'; }
+.hero-title {
+  font-family: var(--serif); font-size: clamp(56px, 9vw, 96px);
+  font-weight: 600; line-height: 0.88; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 28px;
+}
+.hero-title em {
+  font-style: italic; color: transparent;
+  -webkit-text-stroke: 1.5px rgba(5,122,85,0.45); display: block;
+}
+.hero-desc {
+  font-size: 16px; color: var(--mist); max-width: 520px;
+  line-height: 1.75; margin-bottom: 48px; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 56px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  background: #059669; color: white; border: none; border-radius: 5px;
+  padding: 12px 24px; cursor: pointer; text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  background: transparent; color: var(--mist);
+  border: 1px solid var(--rule2); border-radius: 5px;
+  padding: 12px 24px; cursor: pointer; text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+.hero-meta { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+.hero-meta-item {
+  font-family: var(--mono); font-size: 10px; color: var(--fog);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-meta-item::before { content: ''; width: 18px; height: 1px; background: #059669; opacity: 0.5; }
+
+/* FEATURES */
+.features { max-width: 1100px; margin: 0 auto; padding: 96px 60px; }
+.section-label {
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.14em; color: #057a55; margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--serif); font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 16px;
+}
+.section-desc { font-size: 15px; color: var(--mist); max-width: 560px; line-height: 1.75; font-weight: 300; margin-bottom: 56px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.feature-card {
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 8px;
+  padding: 24px; transition: border-color 0.15s, box-shadow 0.15s;
+}
+.feature-card:hover { border-color: rgba(5,122,85,0.3); box-shadow: 0 4px 20px rgba(5,122,85,0.06); }
+.feature-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-bottom: 16px;
+}
+.feature-name { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+.feature-desc { font-size: 13px; color: var(--mist); line-height: 1.65; }
+
+/* COMPARE */
+.compare-wrap { background: var(--bg); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.compare { max-width: 1100px; margin: 0 auto; padding: 96px 60px; }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+@media (max-width: 680px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card {
+  border: 1px solid var(--rule); border-radius: 10px;
+  overflow: hidden;
+}
+.compare-card-head {
+  padding: 20px 24px; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 12px;
+}
+.compare-card-head.lite { background: var(--jade-lt); }
+.compare-card-head.full { background: var(--accent-lt); }
+.compare-card-icon {
+  width: 32px; height: 32px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; font-weight: 700; color: white;
+}
+.compare-card-icon.lite { background: linear-gradient(135deg, #10b981, #059669); }
+.compare-card-icon.full { background: linear-gradient(135deg, var(--accent), #7c3aed); }
+.compare-card-name { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); }
+.compare-card-tag { font-family: var(--mono); font-size: 9px; color: var(--fog); margin-top: 2px; }
+.compare-card-body { padding: 20px 24px; background: var(--bg); }
+.compare-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--bg3); font-size: 12px; color: var(--mist);
+}
+.compare-row:last-child { border-bottom: none; }
+.compare-check { flex-shrink: 0; margin-top: 1px; }
+.check-yes { color: #059669; }
+.check-no { color: var(--rule2); }
+
+/* DOWNLOAD */
+.download-wrap { background: var(--bg2); }
+.download { max-width: 1100px; margin: 0 auto; padding: 96px 60px; }
+.dl-card {
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 12px;
+  padding: 40px 48px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+}
+.dl-icon {
+  width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 18px; font-weight: 700; color: white;
+}
+.dl-info { flex: 1; min-width: 200px; }
+.dl-name { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.dl-sub { font-size: 13px; color: var(--fog); }
+.dl-meta { display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+.dl-meta-item { font-family: var(--mono); font-size: 10px; color: var(--fog); display: flex; align-items: center; gap: 6px; }
+.dl-meta-dot { width: 4px; height: 4px; border-radius: 50%; background: #059669; }
+.dl-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* INSTALL */
+.install { max-width: 1100px; margin: 0 auto; padding: 0 60px 96px; }
+.install-title { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fog); margin-bottom: 20px; }
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 600; color: #059669;
+  width: 24px; flex-shrink: 0; padding-top: 1px;
+}
+.step-body { flex: 1; }
+.step-label { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.step-text { font-size: 13px; color: var(--mist); line-height: 1.65; }
+.step-code {
+  display: inline-block; font-family: var(--mono); font-size: 11px;
+  background: var(--bg3); border: 1px solid var(--rule); border-radius: 3px;
+  padding: 2px 8px; color: var(--ink2); margin-top: 6px;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--rule); background: var(--bg);
+  padding: 32px 60px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.footer-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+.footer-logo {
+  width: 22px; height: 22px; background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 8px; font-weight: 700; color: white;
+}
+.footer-name { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); }
+.footer-name span { color: #059669; }
+.footer-spacer { flex: 1; }
+.footer-copy { font-family: var(--mono); font-size: 10px; color: var(--fog); }
+.footer-link { font-family: var(--mono); font-size: 10px; color: var(--fog); text-decoration: none; transition: color 0.15s; }
+.footer-link:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="top-bar">
+  <a class="bar-brand" href="#">
+    <div class="bar-logo">TSL</div>
+    <span class="bar-name">Tag<span>Sentry</span> Lite</span>
+  </a>
+  <span class="bar-badge">v1.0.0</span>
+  <span class="bar-spacer"></span>
+  <a class="bar-link" href="../index.html">TagSentry Full →</a>
+  <a class="bar-dl" href="tsl-v1.0.0.zip" download>⬇ Download</a>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Free Chrome Extension · v1.0.0</div>
+    <h1 class="hero-title">Tag<br><em>Sentry Lite</em></h1>
+    <p class="hero-desc">Intercept and inspect marketing tags directly in your browser. The free, lightweight version of TagSentry — no account required.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="tsl-v1.0.0.zip" download>⬇ Download v1.0.0 (.zip)</a>
+      <a class="btn-secondary" href="#how-to-install">How to install</a>
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-item">Chrome Extension</span>
+      <span class="hero-meta-item">Free Forever</span>
+      <span class="hero-meta-item">No Account Needed</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">What's included</div>
+  <h2 class="section-title">Everything you need<br>to inspect tags</h2>
+  <p class="section-desc">TagSentry Lite gives you the core tag inspection workflow in a fast, zero-config Chrome extension.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-name">Tag Interception</div>
+      <div class="feature-desc">Capture outbound tag requests in real time as you browse. See exactly what fires and when.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📋</div>
+      <div class="feature-name">Request Inspector</div>
+      <div class="feature-desc">Drill into request payloads, headers, and query parameters for any intercepted tag.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏷️</div>
+      <div class="feature-name">Tag Identification</div>
+      <div class="feature-desc">Automatically identify common martech and adtech vendors from request patterns.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📤</div>
+      <div class="feature-name">Export to JSON</div>
+      <div class="feature-desc">Export captured tag data as JSON for offline analysis or sharing with your team.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-name">Local Only</div>
+      <div class="feature-desc">All processing stays in your browser. No data is ever sent to external servers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-name">Zero Config</div>
+      <div class="feature-desc">Install and go. No sign-up, no setup wizard, no permissions beyond what Chrome requires.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COMPARE -->
+<div class="compare-wrap">
+  <section class="compare">
+    <div class="section-label">Lite vs Full</div>
+    <h2 class="section-title">Choose the right version</h2>
+    <div class="compare-grid">
+
+      <div class="compare-card">
+        <div class="compare-card-head lite">
+          <div class="compare-card-icon lite">TSL</div>
+          <div>
+            <div class="compare-card-name">TagSentry Lite</div>
+            <div class="compare-card-tag">Free — v1.0.0</div>
+          </div>
+        </div>
+        <div class="compare-card-body">
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Tag interception &amp; inspection</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Vendor identification</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> JSON export</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Local-only processing</div>
+          <div class="compare-row"><span class="compare-check check-no">—</span> Baseline diff &amp; comparison</div>
+          <div class="compare-row"><span class="compare-check check-no">—</span> PII detection</div>
+          <div class="compare-row"><span class="compare-check check-no">—</span> Session recording</div>
+          <div class="compare-row"><span class="compare-check check-no">—</span> Allow list management</div>
+        </div>
+      </div>
+
+      <div class="compare-card">
+        <div class="compare-card-head full">
+          <div class="compare-card-icon full">TS</div>
+          <div>
+            <div class="compare-card-name">TagSentry</div>
+            <div class="compare-card-tag">Full version — v1.5.2</div>
+          </div>
+        </div>
+        <div class="compare-card-body">
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Tag interception &amp; inspection</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Vendor identification</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> JSON export</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Local-only processing</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Baseline diff &amp; comparison</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> PII detection</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Session recording</div>
+          <div class="compare-row"><span class="compare-check check-yes">✓</span> Allow list management</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+
+<!-- DOWNLOAD -->
+<div class="download-wrap" id="download">
+  <section class="download">
+    <div class="section-label">Download</div>
+    <h2 class="section-title" style="margin-bottom:40px">Get TagSentry Lite</h2>
+    <div class="dl-card">
+      <div class="dl-icon">TSL</div>
+      <div class="dl-info">
+        <div class="dl-name">tsl-v1.0.0.zip</div>
+        <div class="dl-sub">Chrome extension package — unzip and load in developer mode</div>
+        <div class="dl-meta">
+          <span class="dl-meta-item"><span class="dl-meta-dot"></span>Version 1.0.0</span>
+          <span class="dl-meta-item"><span class="dl-meta-dot"></span>Chrome / Chromium</span>
+          <span class="dl-meta-item"><span class="dl-meta-dot"></span>Free</span>
+        </div>
+      </div>
+      <div class="dl-actions">
+        <a class="btn-primary" href="tsl-v1.0.0.zip" download>⬇ Download .zip</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- INSTALL -->
+<section class="install" id="how-to-install">
+  <div class="install-title">How to install</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <div class="step-label">Download the zip</div>
+        <div class="step-text">Click the download button above to save <span class="step-code">tsl-v1.0.0.zip</span> to your computer.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <div class="step-label">Unzip the file</div>
+        <div class="step-text">Extract the archive to a permanent folder — Chrome will need to access this folder while the extension is active.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <div class="step-label">Open Chrome Extensions</div>
+        <div class="step-text">Navigate to <span class="step-code">chrome://extensions</span> in your browser and enable <strong>Developer mode</strong> using the toggle in the top-right corner.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <div class="step-label">Load the extension</div>
+        <div class="step-text">Click <strong>Load unpacked</strong> and select the folder you extracted in step 2. TagSentry Lite will appear in your extensions list.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <div class="step-label">Pin and start inspecting</div>
+        <div class="step-text">Click the puzzle icon in Chrome's toolbar and pin TagSentry Lite for easy access. Navigate to any page to start capturing tags.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-brand" href="#">
+    <div class="footer-logo">TSL</div>
+    <span class="footer-name">Tag<span>Sentry</span> Lite</span>
+  </a>
+  <span class="footer-spacer"></span>
+  <a class="footer-link" href="../index.html">TagSentry Full version</a>
+  <span class="footer-copy">v1.0.0</span>
+</footer>
+
+</body>
+</html>
