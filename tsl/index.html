@@ -160,39 +160,6 @@ body {
 .feature-name { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
 .feature-desc { font-size: 13px; color: var(--mist); line-height: 1.65; }
 
-/* COMPARE */
-.compare-wrap { background: var(--bg); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.compare { max-width: 1100px; margin: 0 auto; padding: 96px 60px; }
-.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
-@media (max-width: 680px) { .compare-grid { grid-template-columns: 1fr; } }
-.compare-card {
-  border: 1px solid var(--rule); border-radius: 10px;
-  overflow: hidden;
-}
-.compare-card-head {
-  padding: 20px 24px; border-bottom: 1px solid var(--rule);
-  display: flex; align-items: center; gap: 12px;
-}
-.compare-card-head.lite { background: var(--jade-lt); }
-.compare-card-head.full { background: var(--accent-lt); }
-.compare-card-icon {
-  width: 32px; height: 32px; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 10px; font-weight: 700; color: white;
-}
-.compare-card-icon.lite { background: linear-gradient(135deg, #10b981, #059669); }
-.compare-card-icon.full { background: linear-gradient(135deg, var(--accent), #7c3aed); }
-.compare-card-name { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); }
-.compare-card-tag { font-family: var(--mono); font-size: 9px; color: var(--fog); margin-top: 2px; }
-.compare-card-body { padding: 20px 24px; background: var(--bg); }
-.compare-row {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 0; border-bottom: 1px solid var(--bg3); font-size: 12px; color: var(--mist);
-}
-.compare-row:last-child { border-bottom: none; }
-.compare-check { flex-shrink: 0; margin-top: 1px; }
-.check-yes { color: #059669; }
-.check-no { color: var(--rule2); }
 
 /* DOWNLOAD */
 .download-wrap { background: var(--bg2); }
@@ -282,7 +249,6 @@ footer {
     </div>
     <div class="hero-meta">
       <span class="hero-meta-item">Chrome Extension</span>
-      <span class="hero-meta-item">Free Forever</span>
       <span class="hero-meta-item">No Account Needed</span>
     </div>
   </div>
@@ -298,87 +264,36 @@ footer {
     <div class="feature-card">
       <div class="feature-icon">🔍</div>
       <div class="feature-name">Tag Interception</div>
-      <div class="feature-desc">Capture outbound tag requests in real time as you browse. See exactly what fires and when.</div>
+      <div class="feature-desc">See tags fire in real time as you browse any page.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">📋</div>
       <div class="feature-name">Request Inspector</div>
-      <div class="feature-desc">Drill into request payloads, headers, and query parameters for any intercepted tag.</div>
+      <div class="feature-desc">Inspect the details of any captured tag request.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🏷️</div>
-      <div class="feature-name">Tag Identification</div>
-      <div class="feature-desc">Automatically identify common martech and adtech vendors from request patterns.</div>
+      <div class="feature-name">Vendor Recognition</div>
+      <div class="feature-desc">Identify common martech and adtech vendors automatically.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">📤</div>
-      <div class="feature-name">Export to JSON</div>
-      <div class="feature-desc">Export captured tag data as JSON for offline analysis or sharing with your team.</div>
+      <div class="feature-name">Export</div>
+      <div class="feature-desc">Export captured data for offline review or sharing.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🔒</div>
       <div class="feature-name">Local Only</div>
-      <div class="feature-desc">All processing stays in your browser. No data is ever sent to external servers.</div>
+      <div class="feature-desc">Everything stays in your browser — nothing leaves your machine.</div>
     </div>
     <div class="feature-card">
       <div class="feature-icon">⚡</div>
       <div class="feature-name">Zero Config</div>
-      <div class="feature-desc">Install and go. No sign-up, no setup wizard, no permissions beyond what Chrome requires.</div>
+      <div class="feature-desc">Install and go. No sign-up or setup required.</div>
     </div>
   </div>
 </section>
 
-
-<!-- COMPARE -->
-<div class="compare-wrap">
-  <section class="compare">
-    <div class="section-label">Lite vs Full</div>
-    <h2 class="section-title">Choose the right version</h2>
-    <div class="compare-grid">
-
-      <div class="compare-card">
-        <div class="compare-card-head lite">
-          <div class="compare-card-icon lite">TSL</div>
-          <div>
-            <div class="compare-card-name">TagSentry Lite</div>
-            <div class="compare-card-tag">Free — v1.0.0</div>
-          </div>
-        </div>
-        <div class="compare-card-body">
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Tag interception &amp; inspection</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Vendor identification</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> JSON export</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Local-only processing</div>
-          <div class="compare-row"><span class="compare-check check-no">—</span> Baseline diff &amp; comparison</div>
-          <div class="compare-row"><span class="compare-check check-no">—</span> PII detection</div>
-          <div class="compare-row"><span class="compare-check check-no">—</span> Session recording</div>
-          <div class="compare-row"><span class="compare-check check-no">—</span> Allow list management</div>
-        </div>
-      </div>
-
-      <div class="compare-card">
-        <div class="compare-card-head full">
-          <div class="compare-card-icon full">TS</div>
-          <div>
-            <div class="compare-card-name">TagSentry</div>
-            <div class="compare-card-tag">Full version — v1.5.2</div>
-          </div>
-        </div>
-        <div class="compare-card-body">
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Tag interception &amp; inspection</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Vendor identification</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> JSON export</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Local-only processing</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Baseline diff &amp; comparison</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> PII detection</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Session recording</div>
-          <div class="compare-row"><span class="compare-check check-yes">✓</span> Allow list management</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</div>
 
 
 <!-- DOWNLOAD -->
