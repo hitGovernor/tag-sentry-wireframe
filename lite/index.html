@@ -159,7 +159,47 @@ body {
 }
 .feature-name { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
 .feature-desc { font-size: 13px; color: var(--mist); line-height: 1.65; }
+.feature-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.feature-tag {
+  font-family: var(--mono); font-size: 9px; color: var(--fog);
+  background: var(--bg3); border: 1px solid var(--rule); border-radius: 2px;
+  padding: 2px 6px;
+}
 
+/* QUICK START */
+.quickstart-wrap { background: var(--bg); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.quickstart { max-width: 1100px; margin: 0 auto; padding: 80px 60px; }
+.qs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.qs-steps { display: flex; flex-direction: column; gap: 0; }
+.qs-step { display: flex; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.qs-step:last-child { border-bottom: none; }
+.qs-num {
+  font-family: var(--mono); font-size: 11px; font-weight: 600; color: #059669;
+  width: 24px; flex-shrink: 0; padding-top: 1px;
+}
+.qs-body { flex: 1; }
+.qs-label { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.qs-text { font-size: 13px; color: var(--mist); line-height: 1.65; }
+.qs-right { display: flex; flex-direction: column; gap: 20px; }
+.qs-callout {
+  background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.2);
+  border-radius: 8px; padding: 20px 24px;
+}
+.qs-callout-label { font-family: var(--mono); font-size: 10px; font-weight: 600; color: #057a55; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; }
+.qs-callout-text { font-size: 13px; color: var(--mist); line-height: 1.65; }
+.qs-guide-link {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg2); border: 1px solid var(--rule); border-radius: 8px;
+  padding: 20px 24px; text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.qs-guide-link:hover { border-color: rgba(5,122,85,0.35); box-shadow: 0 4px 16px rgba(5,122,85,0.06); }
+.qs-guide-link-label { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.qs-guide-link-sub { font-size: 12px; color: var(--fog); }
+.qs-guide-link-arrow { font-family: var(--mono); font-size: 14px; color: #059669; }
+@media (max-width: 760px) {
+  .qs-grid { grid-template-columns: 1fr; gap: 40px; }
+}
 
 /* DOWNLOAD */
 .download-wrap { background: var(--bg2); }
@@ -230,6 +270,7 @@ footer {
   </a>
   <span class="bar-badge">v1.3.1</span>
   <span class="bar-spacer"></span>
+  <a class="bar-link" href="guide.html">Guide →</a>
   <a class="bar-link" href="../index.html">TagSentry Full →</a>
   <a class="bar-dl" href="tsl-v1.3.1.zip" download>⬇ Download</a>
 </header>
@@ -245,12 +286,13 @@ footer {
     <p class="hero-desc">Real-time tag validation and network monitoring as a Chrome side panel. Capture, validate, and replay — no account, no setup, nothing leaves your browser.</p>
     <div class="hero-actions">
       <a class="btn-primary" href="tsl-v1.3.1.zip" download>⬇ Download v1.3.1 (.zip)</a>
+      <a class="btn-secondary" href="guide.html">Read the Guide</a>
       <a class="btn-secondary" href="#how-to-install">How to install</a>
     </div>
     <div class="hero-meta">
       <span class="hero-meta-item">Chrome · Manifest V3</span>
       <span class="hero-meta-item">Side Panel</span>
-      <span class="hero-meta-item">52 Built-in Vendors</span>
+      <span class="hero-meta-item">50+ Built-in Vendors</span>
       <span class="hero-meta-item">No Account Needed</span>
     </div>
   </div>
@@ -260,42 +302,163 @@ footer {
 <!-- FEATURES -->
 <section class="features">
   <div class="section-label">What's included</div>
-  <h2 class="section-title">Real-time tag validation<br>in your browser</h2>
+  <h2 class="section-title">Everything you need<br>to validate your tags</h2>
   <p class="section-desc">TagSentry Lite runs as a persistent side panel — capturing, matching, and validating network requests against a configurable vendor library as you browse.</p>
   <div class="features-grid">
+
     <div class="feature-card">
       <div class="feature-icon">📡</div>
-      <div class="feature-name">Live Network Monitor</div>
-      <div class="feature-desc">Captures all outbound requests in real time. Each request is matched against the vendor library and flagged as Pass, Fail, Warn, or Excluded. Filter by status, vendor, or request type.</div>
+      <div class="feature-name">Live Tab</div>
+      <div class="feature-desc">Real-time network event feed for the active tab. Each row shows the request method, URL, matched vendor, and PASS / FAIL / WARN / EXCLUDED status. Click any row to expand the full URL, matched rule results with actual vs. expected values, query parameters, and POST body.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">PASS / FAIL / WARN</span>
+        <span class="feature-tag">Filter by vendor</span>
+        <span class="feature-tag">Known vendors only</span>
+      </div>
     </div>
+
     <div class="feature-card">
       <div class="feature-icon">🏷️</div>
-      <div class="feature-name">Vendor Library</div>
-      <div class="feature-desc">52 built-in vendor definitions covering analytics, advertising, and data platforms. Create custom vendors, import and export configurations with conflict resolution, and enable or disable vendors individually.</div>
+      <div class="feature-name">Vendors Tab</div>
+      <div class="feature-desc">50+ built-in vendor definitions covering analytics, advertising, and data platforms. Create custom vendors or override built-ins. Organize with color-coded Labels. Group by Category or Label. Import and export with conflict resolution — overwrite, add as copy, or skip.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">50+ built-in</span>
+        <span class="feature-tag">Labels</span>
+        <span class="feature-tag">Import / Export</span>
+      </div>
     </div>
+
     <div class="feature-card">
       <div class="feature-icon">▶️</div>
-      <div class="feature-name">Flow Recorder & Replay</div>
-      <div class="feature-desc">Record clicks, navigation, and form input as replayable flows. Replay against the live page with configurable step delay and wait strategy. View step-by-step status and a post-replay summary report.</div>
+      <div class="feature-name">Flows Tab</div>
+      <div class="feature-desc">Record multi-step user journeys — clicks, inputs, scrolls, and navigation — then replay them against any URL. View step-by-step status and a post-replay summary report. Export flows as JSON or CSV.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">Record & Replay</span>
+        <span class="feature-tag">JSON / CSV export</span>
+        <span class="feature-tag">Step delay control</span>
+      </div>
     </div>
+
     <div class="feature-card">
       <div class="feature-icon">🍪</div>
       <div class="feature-name">Cookie Manager</div>
-      <div class="feature-desc">Define and apply browser cookies with full control over name, value, domain, path, SameSite policy, expiration, and security flags. Auto-apply on navigation. Root domain derived automatically.</div>
+      <div class="feature-desc">Define and apply browser cookies with full control over name, value, domain, path, SameSite policy, expiration, Secure, and HttpOnly flags. Cookies matching the active tab's hostname are auto-applied on navigation.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">Auto-apply</span>
+        <span class="feature-tag">SameSite / Secure</span>
+        <span class="feature-tag">HttpOnly</span>
+      </div>
     </div>
+
     <div class="feature-card">
       <div class="feature-icon">↔️</div>
       <div class="feature-name">URL Rewrites</div>
-      <div class="feature-desc">Intercept and rewrite outbound requests before they leave the browser using plain string or RE2 regex patterns. Toggle rules on and off instantly without a page reload.</div>
+      <div class="feature-desc">Intercept and redirect outbound requests before they leave the browser using plain string or RE2 regex patterns. Toggle rules on and off instantly without a page reload. Active rewrites display a visible warning banner.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">String or Regex</span>
+        <span class="feature-tag">Toggle instantly</span>
+        <span class="feature-tag">RE2 syntax</span>
+      </div>
     </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">✉️</div>
+      <div class="feature-name">Email Generator</div>
+      <div class="feature-desc">Generate deterministic test email addresses from a configured prefix and domain. Useful for repeatable QA flows that require consistent but unique addresses across multiple test runs.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">Deterministic</span>
+        <span class="feature-tag">Configurable prefix</span>
+      </div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🔑</div>
+      <div class="feature-name">Token Config</div>
+      <div class="feature-desc">Store a reusable token value — API key, auth token, or any string — for injection into flows and replay steps. Keeps credentials out of your recorded actions.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">Flow-injectable</span>
+        <span class="feature-tag">Single stored value</span>
+      </div>
+    </div>
+
     <div class="feature-card">
       <div class="feature-icon">⚙️</div>
       <div class="feature-name">Settings & Backup</div>
-      <div class="feature-desc">Light/dark theme, font size, capture behavior, and replay defaults are all configurable. Export and restore a full backup — all settings, vendors, cookies, and rewrite rules — as a single JSON file.</div>
+      <div class="feature-desc">Light/dark theme, font size (S/M/L), vendor grouping, Known Vendors Only filter, Clear on Navigate, and replay defaults. Export or restore a full backup — all settings, vendors, labels, cookies, rewrite rules, and tokens — as a single JSON file.</div>
+      <div class="feature-tags">
+        <span class="feature-tag">Full JSON backup</span>
+        <span class="feature-tag">Restore / export</span>
+        <span class="feature-tag">Replay defaults</span>
+      </div>
     </div>
+
   </div>
 </section>
 
+
+<!-- QUICK START -->
+<div class="quickstart-wrap">
+  <section class="quickstart">
+    <div class="section-label">Quick start</div>
+    <h2 class="section-title" style="margin-bottom:40px">Up and running<br>in five steps</h2>
+    <div class="qs-grid">
+      <div class="qs-steps">
+        <div class="qs-step">
+          <div class="qs-num">01</div>
+          <div class="qs-body">
+            <div class="qs-label">Open the side panel</div>
+            <div class="qs-text">Click the TagSentry Lite icon in Chrome's toolbar to open the side panel on any tab.</div>
+          </div>
+        </div>
+        <div class="qs-step">
+          <div class="qs-num">02</div>
+          <div class="qs-body">
+            <div class="qs-label">Enable vendors</div>
+            <div class="qs-text">Go to the Vendors tab and enable the vendors you want to monitor. Built-in vendors are disabled by default.</div>
+          </div>
+        </div>
+        <div class="qs-step">
+          <div class="qs-num">03</div>
+          <div class="qs-body">
+            <div class="qs-label">Browse and inspect</div>
+            <div class="qs-text">Switch to the Live tab — requests appear as you browse. Click any row to expand rule-level results with actual vs. expected values.</div>
+          </div>
+        </div>
+        <div class="qs-step">
+          <div class="qs-num">04</div>
+          <div class="qs-body">
+            <div class="qs-label">Record a flow</div>
+            <div class="qs-text">Go to the Flows tab, click Record, interact with the page, then click Stop and save the flow.</div>
+          </div>
+        </div>
+        <div class="qs-step">
+          <div class="qs-num">05</div>
+          <div class="qs-body">
+            <div class="qs-label">Replay and validate</div>
+            <div class="qs-text">Open a saved flow, click Replay, and the extension steps through each recorded action while capturing the resulting network events.</div>
+          </div>
+        </div>
+      </div>
+      <div class="qs-right">
+        <div class="qs-callout">
+          <div class="qs-callout-label">Per-tab monitoring</div>
+          <div class="qs-callout-text">Only the active tab is monitored. Switching tabs pauses capture for the previous tab, keeping memory usage bounded. Each tab maintains its own independent event history.</div>
+        </div>
+        <div class="qs-callout">
+          <div class="qs-callout-label">Vendor rule evaluation</div>
+          <div class="qs-callout-text">Exclusion rules short-circuit first — a matching exclusion marks the event EXCLUDED before inclusion rules run. Required rules fail → FAIL; optional rules fail → WARN.</div>
+        </div>
+        <a class="qs-guide-link" href="guide.html">
+          <div>
+            <div class="qs-guide-link-label">Full Feature Guide &amp; Rule Reference</div>
+            <div class="qs-guide-link-sub">Vendor rule sources, operators, variants, and advanced usage</div>
+          </div>
+          <span class="qs-guide-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
 
 
 <!-- DOWNLOAD -->
@@ -372,6 +535,7 @@ footer {
     <span class="footer-name">Tag<span>Sentry</span> Lite</span>
   </a>
   <span class="footer-spacer"></span>
+  <a class="footer-link" href="guide.html">Guide</a>
   <a class="footer-link" href="../index.html">TagSentry Full version</a>
   <span class="footer-copy">v1.3.1</span>
 </footer>

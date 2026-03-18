@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TagSentry Lite — Feature Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #ffffff;
+  --bg2:       #f7f7fb;
+  --bg3:       #eeeef6;
+  --bg4:       #e4e3f0;
+  --rule:      #dddcec;
+  --rule2:     #c9c8dc;
+  --ink:       #1a1833;
+  --ink2:      #2e2c4e;
+  --fog:       #6b6988;
+  --mist:      #4a4870;
+  --accent:    #4f46e5;
+  --accent-lt: #eeeeff;
+  --jade:      #057a55;
+  --jade-lt:   #edfaf3;
+  --mono: 'IBM Plex Mono', monospace;
+  --serif: 'Fraunces', serif;
+  --body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg2);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* NAV */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(255,255,255,0.93); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 48px; height: 48px;
+  display: flex; align-items: center; gap: 16px;
+}
+.bar-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); flex-shrink: 0; }
+.bar-logo {
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; font-weight: 700; color: white;
+}
+.bar-name { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--ink); }
+.bar-name span { color: #059669; }
+.bar-badge { font-family: var(--mono); font-size: 9px; color: #057a55; background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.3); border-radius: 2px; padding: 2px 7px; }
+.bar-spacer { flex: 1; }
+.bar-link { font-family: var(--mono); font-size: 10px; color: var(--fog); text-decoration: none; transition: color 0.15s; }
+.bar-link:hover { color: var(--accent); }
+.bar-link-active { color: var(--jade) !important; }
+.bar-dl {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; font-weight: 600;
+  background: #059669; color: white; border: none; border-radius: 4px;
+  padding: 6px 14px; cursor: pointer; text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s; flex-shrink: 0;
+}
+.bar-dl:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* LAYOUT */
+.page-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 48px 0;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .page-layout { grid-template-columns: 1fr; padding: 72px 24px 0; gap: 0; }
+  .sidebar { display: none; }
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: sticky; top: 72px;
+  padding: 24px 0 48px;
+}
+.sidebar-section { margin-bottom: 28px; }
+.sidebar-label {
+  font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--fog); margin-bottom: 10px; padding-left: 12px;
+}
+.sidebar-link {
+  display: block; font-family: var(--mono); font-size: 11px; color: var(--mist);
+  text-decoration: none; padding: 5px 12px; border-radius: 4px;
+  transition: background 0.12s, color 0.12s;
+  border-left: 2px solid transparent;
+}
+.sidebar-link:hover { background: var(--bg3); color: var(--ink); }
+.sidebar-link.active { color: #057a55; border-left-color: #059669; background: var(--jade-lt); }
+
+/* CONTENT */
+.content {
+  padding: 32px 0 120px;
+  max-width: 740px;
+}
+
+/* PAGE HEADER */
+.page-header { margin-bottom: 64px; }
+.page-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: #057a55; border: 1px solid rgba(5,122,85,0.3); background: var(--jade-lt);
+  border-radius: 2px; padding: 5px 12px; margin-bottom: 24px;
+}
+.page-eyebrow::before { content: '▸'; }
+.page-title {
+  font-family: var(--serif); font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600; line-height: 1.0; letter-spacing: -0.02em;
+  color: var(--ink); margin-bottom: 16px;
+}
+.page-desc { font-size: 16px; color: var(--mist); line-height: 1.75; font-weight: 300; max-width: 520px; }
+
+/* SECTIONS */
+.guide-section { margin-bottom: 72px; }
+.guide-section-anchor { scroll-margin-top: 72px; }
+.guide-section-label {
+  font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--fog); margin-bottom: 8px;
+}
+.guide-section-title {
+  font-family: var(--serif); font-size: clamp(22px, 3vw, 30px);
+  font-weight: 600; color: var(--ink); line-height: 1.1;
+  margin-bottom: 16px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.guide-body { font-size: 14px; color: var(--mist); line-height: 1.75; }
+.guide-body p { margin-bottom: 16px; }
+.guide-body p:last-child { margin-bottom: 0; }
+.guide-body strong { color: var(--ink); font-weight: 600; }
+
+/* SUB SECTIONS */
+.sub-section { margin-top: 32px; }
+.sub-title {
+  font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.sub-title-icon {
+  width: 24px; height: 24px; border-radius: 5px;
+  background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+
+/* TABLE */
+.ref-table {
+  width: 100%; border-collapse: collapse; margin-top: 16px;
+  font-size: 13px;
+}
+.ref-table th {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; color: var(--fog);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  text-align: left; padding: 10px 16px;
+  border-bottom: 2px solid var(--rule2);
+  background: var(--bg2);
+}
+.ref-table td {
+  padding: 10px 16px; vertical-align: top;
+  border-bottom: 1px solid var(--rule); color: var(--mist);
+}
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table td:first-child { font-family: var(--mono); font-size: 12px; color: var(--ink2); font-weight: 500; }
+.ref-table tr:hover td { background: var(--bg2); }
+
+/* CODE CHIP */
+code {
+  font-family: var(--mono); font-size: 12px;
+  background: var(--bg3); border: 1px solid var(--rule);
+  border-radius: 3px; padding: 1px 6px; color: var(--ink2);
+}
+
+/* STATUS PILLS */
+.pill {
+  display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+  border-radius: 3px; padding: 2px 8px; letter-spacing: 0.05em;
+}
+.pill-pass  { background: #edfaf3; color: #057a55; border: 1px solid rgba(5,122,85,0.3); }
+.pill-fail  { background: #fef2f2; color: #b91c1c; border: 1px solid rgba(185,28,28,0.2); }
+.pill-warn  { background: #fffbeb; color: #92400e; border: 1px solid rgba(146,64,14,0.25); }
+.pill-excl  { background: var(--bg3); color: var(--fog); border: 1px solid var(--rule2); }
+
+/* CALLOUT */
+.callout {
+  background: var(--jade-lt); border: 1px solid rgba(5,122,85,0.2);
+  border-radius: 6px; padding: 16px 20px; margin: 20px 0;
+}
+.callout-label { font-family: var(--mono); font-size: 10px; font-weight: 600; color: #057a55; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.callout p { font-size: 13px; color: var(--mist); line-height: 1.65; margin: 0; }
+
+/* SETTINGS LIST */
+.settings-list { display: flex; flex-direction: column; gap: 0; margin-top: 16px; }
+.settings-row {
+  display: flex; gap: 20px; padding: 12px 0;
+  border-bottom: 1px solid var(--rule); align-items: baseline;
+}
+.settings-row:last-child { border-bottom: none; }
+.settings-key { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink2); min-width: 180px; flex-shrink: 0; }
+.settings-val { font-size: 13px; color: var(--mist); line-height: 1.55; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--rule); background: var(--bg);
+  padding: 32px 60px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.footer-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+.footer-logo {
+  width: 22px; height: 22px; background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 8px; font-weight: 700; color: white;
+}
+.footer-name { font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--ink); }
+.footer-name span { color: #059669; }
+.footer-spacer { flex: 1; }
+.footer-copy { font-family: var(--mono); font-size: 10px; color: var(--fog); }
+.footer-link { font-family: var(--mono); font-size: 10px; color: var(--fog); text-decoration: none; transition: color 0.15s; }
+.footer-link:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="top-bar">
+  <a class="bar-brand" href="index.html">
+    <div class="bar-logo">TSL</div>
+    <span class="bar-name">Tag<span>Sentry</span> Lite</span>
+  </a>
+  <span class="bar-badge">v1.3.1</span>
+  <span class="bar-spacer"></span>
+  <a class="bar-link bar-link-active" href="guide.html">Guide</a>
+  <a class="bar-link" href="index.html">← Back</a>
+  <a class="bar-dl" href="tsl-v1.3.1.zip" download>⬇ Download</a>
+</header>
+
+
+<div class="page-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Overview</div>
+      <a class="sidebar-link" href="#what-it-is">What it is</a>
+      <a class="sidebar-link" href="#quick-start">Quick start</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Tabs</div>
+      <a class="sidebar-link" href="#live-tab">Live Tab</a>
+      <a class="sidebar-link" href="#flows-tab">Flows Tab</a>
+      <a class="sidebar-link" href="#vendors-tab">Vendors Tab</a>
+      <a class="sidebar-link" href="#advanced-tab">Advanced Tab</a>
+      <a class="sidebar-link" href="#settings-tab">Settings Tab</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Reference</div>
+      <a class="sidebar-link" href="#rule-sources">Rule Sources</a>
+      <a class="sidebar-link" href="#check-types">Check Types</a>
+      <a class="sidebar-link" href="#rule-weight">Rule Weight</a>
+      <a class="sidebar-link" href="#variants">Variants</a>
+    </div>
+  </aside>
+
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div class="page-eyebrow">Feature Guide · v1.3.1</div>
+      <h1 class="page-title">TagSentry Lite<br>Guide</h1>
+      <p class="page-desc">Full feature reference for TagSentry Lite — a Chrome side panel extension for monitoring, validating, and replaying marketing and analytics vendor tags.</p>
+    </div>
+
+
+    <!-- WHAT IT IS -->
+    <section class="guide-section" id="what-it-is">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Overview</div>
+      <h2 class="guide-section-title">What it is</h2>
+      <div class="guide-body">
+        <p>TagSentry Lite inspects network requests in real time, matches them against vendor rule sets, and reports <span class="pill pill-pass">PASS</span> <span class="pill pill-fail">FAIL</span> <span class="pill pill-warn">WARN</span> <span class="pill pill-excl">EXCLUDED</span> status for each event.</p>
+        <p>It runs entirely inside Chrome as a persistent side panel. No account is required, no data leaves your browser, and nothing is installed on a server.</p>
+      </div>
+    </section>
+
+
+    <!-- QUICK START -->
+    <section class="guide-section" id="quick-start">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Overview</div>
+      <h2 class="guide-section-title">Quick start</h2>
+      <div class="guide-body">
+        <p><strong>1.</strong> Open the extension side panel by clicking the toolbar icon.<br>
+        <strong>2.</strong> Go to the <strong>Vendors</strong> tab and enable the vendors you want to monitor (built-ins are disabled by default).<br>
+        <strong>3.</strong> Switch to the <strong>Live</strong> tab — requests appear as you browse.<br>
+        <strong>4.</strong> Click any row to expand it and inspect rule-level results.<br>
+        <strong>5.</strong> To record a flow: go to <strong>Flows</strong>, click <strong>Record</strong>, interact with the page, click <strong>Stop</strong>, then save.<br>
+        <strong>6.</strong> To replay: open a saved flow and click <strong>Replay</strong> — the extension steps through each recorded action and captures the resulting network events.</p>
+      </div>
+    </section>
+
+
+    <!-- LIVE TAB -->
+    <section class="guide-section" id="live-tab">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Tabs</div>
+      <h2 class="guide-section-title">Live Tab</h2>
+      <div class="guide-body">
+        <p>The Live tab is a real-time network event feed for the active browser tab. Each row shows the request method, URL, matched vendor, and status.</p>
+        <p>Click any row to expand it and see:</p>
+        <p>
+          · The full request URL<br>
+          · Matched rule results with <strong>actual vs. expected</strong> values<br>
+          · Query parameters<br>
+          · POST body (if present)
+        </p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Filter options</div>
+        <div class="guide-body">
+          <p>Filter the event list by status (PASS / FAIL / WARN / EXCLUDED), by vendor name, or by request type. Enable <strong>Known Vendors Only</strong> in Settings to hide unmatched requests entirely.</p>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Per-tab behavior</div>
+        <div class="guide-body">
+          <p>Only the active tab is monitored. Switching tabs pauses storage for the previous tab, keeping memory usage bounded. Each tab maintains its own independent event history.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FLOWS TAB -->
+    <section class="guide-section" id="flows-tab">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Tabs</div>
+      <h2 class="guide-section-title">Flows Tab</h2>
+      <div class="guide-body">
+        <p>Flows let you record and replay multi-step user journeys to automate tag validation across a defined user path.</p>
+        <p><strong>Recording:</strong> Click <strong>Record</strong>, interact with a page (clicks, inputs, scrolls, navigation), then click <strong>Stop</strong>. Give the flow a name and save it.</p>
+        <p><strong>Replay:</strong> Open a saved flow and click <strong>Replay</strong>. The extension steps through each recorded action against the live page. A step-by-step status view and post-replay summary report are shown on completion.</p>
+        <p><strong>Export:</strong> Flows can be exported as <code>JSON</code> or <code>CSV</code> for use in external tools or documentation.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Replay settings</div>
+        <div class="guide-body">
+          <p>Configure step delay (ms), whether the delay applies before or after each step, and the wait strategy in the Settings tab. These defaults apply to all replays but can be overridden per replay session.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- VENDORS TAB -->
+    <section class="guide-section" id="vendors-tab">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Tabs</div>
+      <h2 class="guide-section-title">Vendors Tab</h2>
+      <div class="guide-body">
+        <p>The vendor library contains the rule sets used to match and evaluate network requests. 50+ built-in vendors are included but disabled by default — enable only what you need.</p>
+        <p>Each vendor is defined by URL patterns, inclusion rules (required and optional parameters), exclusion rules, call-type filters, and call-type variants for endpoints that serve multiple event types.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Custom vendors</div>
+        <div class="guide-body">
+          <p>Create your own vendor definitions or override built-in ones. Custom vendors follow the same rule schema as built-ins.</p>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Labels</div>
+        <div class="guide-body">
+          <p>Assign color-coded Labels to vendors for grouping and filtering. Labels are configurable from the Vendors tab. The vendor list can be grouped by <strong>Category</strong> or <strong>Label</strong> — set the default in Settings.</p>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title">Import &amp; Export</div>
+        <div class="guide-body">
+          <p>Export vendor definitions as JSON and share them across teams. When importing, conflict resolution lets you choose to <strong>overwrite</strong>, <strong>add as copy</strong>, or <strong>skip</strong> any conflicting vendor.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ADVANCED TAB -->
+    <section class="guide-section" id="advanced-tab">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Tabs</div>
+      <h2 class="guide-section-title">Advanced Tab</h2>
+      <div class="guide-body">
+        <p>The Advanced tab contains four utility tools: Cookie Manager, URL Rewrites, Email Generator, and Token Config.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-title-icon">🍪</span> Cookie Manager</div>
+        <div class="guide-body">
+          <p>Define browser cookies with full control over name, value, domain, path, SameSite policy (<code>Strict</code> / <code>Lax</code> / <code>None</code>), expiration, <code>Secure</code>, and <code>HttpOnly</code> flags. Root domain is derived automatically from the domain field.</p>
+          <p>Cookies whose domain matches the active tab's hostname are <strong>auto-applied on navigation</strong>. You can also apply or remove cookies manually.</p>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-title-icon">↔️</span> URL Rewrites</div>
+        <div class="guide-body">
+          <p>Intercept outbound network requests and redirect them to a different URL before they leave the browser. Rules can use <strong>plain string</strong> matching or <strong>RE2 regex</strong> patterns.</p>
+          <p>Toggle rules on and off instantly without a page reload. When one or more rewrite rules are active, a warning banner is displayed in the extension to signal that the captured traffic may differ from production.</p>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-title-icon">✉️</span> Email Generator</div>
+        <div class="guide-body">
+          <p>Generate deterministic test email addresses from a configured prefix and domain. The generated address is consistent across runs for the same configuration, making it suitable for repeatable QA flows.</p>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-title-icon">🔑</span> Token Config</div>
+        <div class="guide-body">
+          <p>Store a single reusable token value — an API key, auth token, or any string. The token can be referenced and injected into flow steps, keeping sensitive values out of the recorded action payloads.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SETTINGS TAB -->
+    <section class="guide-section" id="settings-tab">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Tabs</div>
+      <h2 class="guide-section-title">Settings Tab</h2>
+      <div class="settings-list">
+        <div class="settings-row">
+          <div class="settings-key">Font size</div>
+          <div class="settings-val">S / M / L — adjusts the density of the Live tab and other list views.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Vendor group-by</div>
+          <div class="settings-val">Group the Vendors tab list by <strong>Category</strong> or <strong>Label</strong>.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Known Vendors Only</div>
+          <div class="settings-val">Filter the Live tab to show only requests that matched a vendor. Unmatched requests are hidden.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Clear on Navigate</div>
+          <div class="settings-val">Automatically clear the Live tab event list when the page navigates to a new URL.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Replay step delay</div>
+          <div class="settings-val">Default millisecond delay inserted between replay steps.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Delay timing</div>
+          <div class="settings-val">Apply the step delay <strong>before</strong> or <strong>after</strong> each replay action.</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Wait strategy</div>
+          <div class="settings-val">How replay waits for page readiness between steps (e.g. fixed delay, DOMContentLoaded).</div>
+        </div>
+        <div class="settings-row">
+          <div class="settings-key">Full Backup</div>
+          <div class="settings-val">Export or restore all settings, vendors, labels, cookies, rewrite rules, and tokens as a single JSON file.</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- RULE SOURCES -->
+    <section class="guide-section" id="rule-sources">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Vendor Rule Reference</div>
+      <h2 class="guide-section-title">Rule Sources</h2>
+      <div class="guide-body">
+        <p>Each vendor rule targets a <strong>source</strong> — where in the request the key is looked up — and a <strong>key</strong> name to match against.</p>
+      </div>
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>What it matches</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>query</td><td>URL query parameters</td></tr>
+          <tr><td>body</td><td>POST body fields</td></tr>
+          <tr><td>header</td><td>Response headers</td></tr>
+          <tr><td>cookie</td><td>Browser cookies</td></tr>
+          <tr><td>hostname</td><td>The request hostname</td></tr>
+          <tr><td>path</td><td>The request URL path</td></tr>
+          <tr><td>any</td><td>Query + body + header + cookie combined</td></tr>
+          <tr><td>query+body</td><td>Any combination using <code>+</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+
+    <!-- CHECK TYPES -->
+    <section class="guide-section" id="check-types">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Vendor Rule Reference</div>
+      <h2 class="guide-section-title">Check Types</h2>
+      <div class="guide-body">
+        <p>The <strong>check type</strong> defines how the rule evaluates the matched key's value.</p>
+      </div>
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>present</td><td>Key exists with any non-empty value</td></tr>
+          <tr><td>= value</td><td>Key exists and value matches exactly</td></tr>
+          <tr><td>≠ value</td><td>Key exists and value does not match</td></tr>
+          <tr><td>absent</td><td>Key is not present (used in <code>detectWhen</code> only)</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:20px">
+        <div class="callout-label">Value matching patterns</div>
+        <p>Values support <strong>exact match</strong>, <strong>wildcard prefix/suffix</strong> (<code>value*</code>, <code>*value</code>), and <strong>regex</strong> (<code>/pattern/flags</code>).</p>
+      </div>
+    </section>
+
+
+    <!-- RULE WEIGHT -->
+    <section class="guide-section" id="rule-weight">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Vendor Rule Reference</div>
+      <h2 class="guide-section-title">Rule Weight &amp; Evaluation Order</h2>
+      <div class="guide-body">
+        <p>Rules are evaluated in a defined order for each matched request:</p>
+        <p><strong>1. Exclusion rules</strong> are checked first. A matching exclusion short-circuits all further evaluation and marks the event <span class="pill pill-excl">EXCLUDED</span>. Exclusions support status codes and parameter / cookie / header rules.</p>
+        <p><strong>2. Inclusion rules</strong> are checked next, classified by weight:</p>
+      </div>
+      <table class="ref-table" style="margin-top:16px">
+        <thead>
+          <tr>
+            <th>Weight</th>
+            <th>Behavior on failure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Required</td><td>Must pass — failure results in <span class="pill pill-fail">FAIL</span></td></tr>
+          <tr><td>Optional</td><td>Should pass — failure results in <span class="pill pill-warn">WARN</span></td></tr>
+        </tbody>
+      </table>
+      <div class="guide-body" style="margin-top:16px">
+        <p>If all required and optional rules pass, the event is marked <span class="pill pill-pass">PASS</span>.</p>
+      </div>
+    </section>
+
+
+    <!-- VARIANTS -->
+    <section class="guide-section" id="variants">
+      <div class="guide-section-anchor"></div>
+      <div class="guide-section-label">Vendor Rule Reference</div>
+      <h2 class="guide-section-title">Variants</h2>
+      <div class="guide-body">
+        <p>Variants allow a single vendor endpoint to define multiple call types — for example, a <strong>Page View</strong> and a <strong>Link Click</strong> that share the same base URL pattern but carry different parameters.</p>
+        <p>Each variant has a <code>detectWhen</code> condition set. When a request is matched:</p>
+        <p>
+          1. Variants are checked in order.<br>
+          2. The <strong>first variant</strong> whose <code>detectWhen</code> conditions all match is selected.<br>
+          3. That variant's inclusion and exclusion rules are used for evaluation.<br>
+          4. If <strong>no variant matches</strong>, the vendor's base rules are applied instead.
+        </p>
+      </div>
+      <div class="callout">
+        <div class="callout-label">Tip</div>
+        <p>Use <code>absent</code> checks in <code>detectWhen</code> to distinguish variants where one call type deliberately omits a parameter that another includes.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-brand" href="index.html">
+    <div class="footer-logo">TSL</div>
+    <span class="footer-name">Tag<span>Sentry</span> Lite</span>
+  </a>
+  <span class="footer-spacer"></span>
+  <a class="footer-link" href="index.html">← Back to overview</a>
+  <a class="footer-link" href="../index.html">TagSentry Full version</a>
+  <span class="footer-copy">v1.3.1</span>
+</footer>
+
+</body>
+</html>
