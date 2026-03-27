@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TagSentry Lite — Feature Guide</title>
+<title>TagGovernor — Feature Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -246,14 +246,14 @@ footer {
 <!-- NAV -->
 <header class="top-bar">
   <a class="bar-brand" href="index.html">
-    <div class="bar-logo">TSL</div>
-    <span class="bar-name">Tag<span>Sentry</span> Lite</span>
+    <div class="bar-logo">TG</div>
+    <span class="bar-name">Tag<span>Governor</span></span>
   </a>
-  <span class="bar-badge">v1.11.0</span>
+  <span class="bar-badge">v1.12.0</span>
   <span class="bar-spacer"></span>
   <a class="bar-link bar-link-active" href="guide.html">Guide</a>
   <a class="bar-link" href="index.html">← Back</a>
-  <a class="bar-dl" href="tsl-v1.11.0.zip" download>⬇ Download</a>
+  <a class="bar-dl" href="tg-v1.12.0.zip" download>⬇ Download</a>
 </header>
 
 
@@ -296,9 +296,9 @@ footer {
 
     <!-- PAGE HEADER -->
     <div class="page-header">
-      <div class="page-eyebrow">Feature Guide · v1.11.0</div>
-      <h1 class="page-title">TagSentry Lite<br>Guide</h1>
-      <p class="page-desc">Full feature reference for TagSentry Lite — a Chrome side panel extension for monitoring, validating, and replaying marketing and analytics vendor tags.</p>
+      <div class="page-eyebrow">Feature Guide · v1.12.0</div>
+      <h1 class="page-title">TagGovernor<br>Guide</h1>
+      <p class="page-desc">Full feature reference for TagGovernor — a Chrome side panel extension for monitoring, validating, and replaying marketing and analytics vendor tags.</p>
     </div>
 
 
@@ -308,7 +308,7 @@ footer {
       <div class="guide-section-label">Overview</div>
       <h2 class="guide-section-title">What it is</h2>
       <div class="guide-body">
-        <p>TagSentry Lite inspects network requests in real time, matches them against vendor rule sets, and reports <span class="pill pill-pass">PASS</span> <span class="pill pill-fail">FAIL</span> <span class="pill pill-warn">WARN</span> <span class="pill pill-excl">EXCLUDED</span> status for each event.</p>
+        <p>TagGovernor inspects network requests in real time, matches them against vendor rule sets, and reports <span class="pill pill-pass">PASS</span> <span class="pill pill-fail">FAIL</span> <span class="pill pill-warn">WARN</span> <span class="pill pill-excl">EXCLUDED</span> status for each event.</p>
         <p>It runs entirely inside Chrome as a persistent side panel. No account is required, no data leaves your browser, and nothing is installed on a server.</p>
         <p>It's built for QA analysts, tag managers, and analytics engineers who need to verify that vendors like Google Analytics, Meta Pixel, or any custom tag are firing correctly — with the right parameters, on the right events.</p>
       </div>
@@ -321,13 +321,13 @@ footer {
       <div class="guide-section-label">Overview</div>
       <h2 class="guide-section-title">Core concepts</h2>
       <div class="guide-body">
-        <p>Tag Sentry ships with 52 built-in vendor definitions (all disabled by default). You can enable any of them, override their rules, or create your own from scratch.</p>
+        <p>TagGovernor ships with 52 built-in vendor definitions (all disabled by default). You can enable any of them, override their rules, or create your own from scratch.</p>
       </div>
 
       <div class="sub-section">
         <div class="sub-title">Vendors</div>
         <div class="guide-body">
-          <p>A vendor is a definition that tells Tag Sentry what to look for. Each vendor has:</p>
+          <p>A vendor is a definition that tells TagGovernor what to look for. Each vendor has:</p>
           <p>
             · <strong>URL patterns</strong> — substrings or regular expressions that identify the vendor's requests<br>
             · <strong>Required parameters</strong> — must pass for the tag to be considered passing<br>
@@ -357,7 +357,7 @@ footer {
       <div class="sub-section">
         <div class="sub-title">Request types</div>
         <div class="guide-body">
-          <p>Tag Sentry normalizes every request into one of these types, which you can use in vendor rules and exclusion filters:</p>
+          <p>TagGovernor normalizes every request into one of these types, which you can use in vendor rules and exclusion filters:</p>
           <p><code>XHR-GET</code> · <code>XHR-POST</code> · <code>FETCH-GET</code> · <code>FETCH-POST</code> · <code>BEACON</code> · <code>PING</code> · <code>PREFLIGHT</code> · <code>SCRIPT</code> · <code>IMAGE</code> · <code>STYLESHEET</code> · <code>IFRAME</code> · <code>NAVIGATION</code> · <code>OTHER</code></p>
         </div>
       </div>
@@ -429,7 +429,7 @@ footer {
       <div class="guide-section-label">Tabs</div>
       <h2 class="guide-section-title">Flows Tab</h2>
       <div class="guide-body">
-        <p>Flows let you record a sequence of user interactions and replay them on demand. During replay, Tag Sentry captures all network requests and runs them through your vendor rules — giving you a repeatable validation run.</p>
+        <p>Flows let you record a sequence of user interactions and replay them on demand. During replay, TagGovernor captures all network requests and runs them through your vendor rules — giving you a repeatable validation run.</p>
         <p><strong>Recording:</strong> Click <strong>Record</strong>, interact with a page (clicks, inputs, scrolls, navigation), then click <strong>Stop</strong>. Give the flow a name and save it.</p>
       </div>
 
@@ -497,7 +497,7 @@ footer {
         <div class="sub-title">Import &amp; Export</div>
         <div class="guide-body">
           <p>
-            · <strong>Export as JSON</strong> — the full flow definition, re-importable into Tag Sentry<br>
+            · <strong>Export as JSON</strong> — the full flow definition, re-importable into TagGovernor<br>
             · <strong>Export as CSV</strong> — a human-readable step-by-step breakdown, useful for documentation<br>
             · <strong>Import</strong> — load a JSON flow file from disk
           </p>
@@ -594,8 +594,8 @@ footer {
           <p>
             <strong>1.</strong> In Chrome DevTools, open the Network tab and reproduce the user journey.<br>
             <strong>2.</strong> Right-click the request list and choose <strong>Save all as HAR with content</strong>.<br>
-            <strong>3.</strong> Open the Audit tab in Tag Sentry and click <strong>Load HAR File</strong>.<br>
-            <strong>4.</strong> Tag Sentry parses the HAR and runs every request through your enabled vendor rules.<br>
+            <strong>3.</strong> Open the Audit tab in TagGovernor and click <strong>Load HAR File</strong>.<br>
+            <strong>4.</strong> TagGovernor parses the HAR and runs every request through your enabled vendor rules.<br>
             <strong>5.</strong> Results appear in the same format as the Live tab.
           </p>
         </div>
@@ -611,7 +611,7 @@ footer {
 
       <div class="callout">
         <div class="callout-label">HAR compatibility</div>
-        <p>Tag Sentry reads the standard HAR 1.2 format and uses the <code>_resourceType</code> field for request type classification. HAR files from Firefox or Safari may not include this field — those requests fall back to type <code>OTHER</code>. All other fields (URL, method, headers, body, status) are standard and will parse correctly.</p>
+        <p>TagGovernor reads the standard HAR 1.2 format and uses the <code>_resourceType</code> field for request type classification. HAR files from Firefox or Safari may not include this field — those requests fall back to type <code>OTHER</code>. All other fields (URL, method, headers, body, status) are standard and will parse correctly.</p>
       </div>
 
       <div class="sub-section">
@@ -824,7 +824,7 @@ footer {
           3. That variant's inclusion and exclusion rules are used for evaluation.<br>
           4. If <strong>no variant matches</strong>, the vendor's base rules are applied instead.
         </p>
-        <p><strong>Example:</strong> A GA4 vendor with a "purchase" variant detected when <code>en=purchase</code>. When that variant matches, Tag Sentry checks for <code>tr</code> (transaction ID) and <code>tt</code> (total) as required parameters. Other events fall through to the base rules.</p>
+        <p><strong>Example:</strong> A GA4 vendor with a "purchase" variant detected when <code>en=purchase</code>. When that variant matches, TagGovernor checks for <code>tr</code> (transaction ID) and <code>tt</code> (total) as required parameters. Other events fall through to the base rules.</p>
       </div>
       <div class="callout">
         <div class="callout-label">Tip</div>
@@ -883,7 +883,7 @@ footer {
 
       <div class="faq-item">
         <div class="faq-q">Why are my vendor rules passing on the Live tab but failing in the Audit tab?</div>
-        <div class="faq-a">Older versions of Tag Sentry had a bug where HAR request types weren't normalized correctly — <code>xhr</code> requests would appear as <code>xmlhttprequest</code> instead of <code>XHR-POST</code> or <code>XHR-GET</code>, causing type-based rules to behave differently. This was fixed in version 1.11.0.</div>
+        <div class="faq-a">Older versions of TagGovernor had a bug where HAR request types weren't normalized correctly — <code>xhr</code> requests would appear as <code>xmlhttprequest</code> instead of <code>XHR-POST</code> or <code>XHR-GET</code>, causing type-based rules to behave differently. This was fixed in version 1.12.0.</div>
       </div>
 
       <div class="faq-item">
@@ -927,8 +927,8 @@ footer {
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Does Tag Sentry work on HAR files from other browsers?</div>
-        <div class="faq-a">Tag Sentry reads the standard HAR 1.2 format and uses the <code>_resourceType</code> field for request type classification. That field is a Chrome DevTools extension to the HAR spec. HAR files from Firefox or Safari may not include it — those requests fall back to type <code>OTHER</code>. All other fields (URL, method, headers, body, status) are standard and will parse correctly.</div>
+        <div class="faq-q">Does TagGovernor work on HAR files from other browsers?</div>
+        <div class="faq-a">TagGovernor reads the standard HAR 1.2 format and uses the <code>_resourceType</code> field for request type classification. That field is a Chrome DevTools extension to the HAR spec. HAR files from Firefox or Safari may not include it — those requests fall back to type <code>OTHER</code>. All other fields (URL, method, headers, body, status) are standard and will parse correctly.</div>
       </div>
 
     </section>
@@ -940,13 +940,13 @@ footer {
 <!-- FOOTER -->
 <footer>
   <a class="footer-brand" href="index.html">
-    <div class="footer-logo">TSL</div>
-    <span class="footer-name">Tag<span>Sentry</span> Lite</span>
+    <div class="footer-logo">TG</div>
+    <span class="footer-name">Tag<span>Governor</span></span>
   </a>
   <span class="footer-spacer"></span>
   <a class="footer-link" href="index.html">← Back to overview</a>
   <a class="footer-link" href="../index.html">TagSentry Full version</a>
-  <span class="footer-copy">v1.11.0</span>
+  <span class="footer-copy">v1.12.0</span>
 </footer>
 
 </body>
